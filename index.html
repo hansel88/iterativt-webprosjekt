@@ -3,48 +3,63 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Gruppe 27</title>
-		<link rel="stylesheet" type="text/css" href="css/main.css">
-		<link rel="stylesheet" type="text/css" href="css/jquery.datetimepicker.css">
+		<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+		<link rel="stylesheet" href="css/main.css">
+		<link rel="stylesheet" href="css/jquery.datetimepicker.css">
 	</head>
 
 	<body>
-		<div id="wrapper">
-			<div id="logo">
+		<div id="logo">
+			<a href="http://www.westerdals.no/">
 				<img id="logobilde" src="img/logo.jpg" alt="logo">
-			</div>
+			</a>
+		</div>
 
+		<section id="wrapper">
 			<h1>Rom-booking</h1>
 
-			<form name="input" method="post">
-				<input type="text" name="navn" placeholder="Navn" required>
-				<br>
-				<br>
+			<div id="form">
+				<form class="pure-form pure-form-aligned" name="input" method="post">
+					<fieldset>
+						<div class="pure-control-group">
+							<label for="epost">Epost:</label>
+							<input type="email" name="epost" size="25" pattern=".+@student.westerdals.no" title="@student.westerdals.no" placeholder="bruker@student.westerdals.no" required>
+						</div>
+						<!--
+						Dato: <input type="date" name="dato" required>
+						<br>
+						Fra <input type="time" name="ftid" required>
+						til <input type="time" name="ttid" required>
+						-->
 
-				<!--
-				Dato: <input type="date" name="dato" required>
-				<br>
-				Fra <input type="time" name="ftid" required>
-				til <input type="time" name="ttid" required>
-				-->
+						<div class="pure-control-group">
+							<label for="some_class_1">Fra:</label>
+							<input type="text" class="some_class" value="" id="some_class_1" size="25" required>
+							<label for="some_class_2">Til:</label>
+							<input type="text" class="some_class" value="" id="some_class_2" size="25" required>
+						</div>
 
-				Fra:
-				<input type="text" class="some_class" value="" id="some_class_1"/>
-				<br /><br />
-				Til:
-				<input type="text" class="some_class" value="" id="some_class_2"/>
-				<br>
-				<p>Hvor mange er dere?</p>
-				<input type="radio" name="antall" value="2" checked>2
-				<input type="radio" name="antall" value="3">3
-				<input type="radio" name="antall" value="4">4
-				<br>
-				<br>
-				<input type="checkbox" name="projektor" value="projektor">Rom med projektor
-				<br>
-				<br>
-				<input type="submit" value="Søk rom">
-			</form>
-		</div>
+						<div class="pure-control-group">
+							<label for="antall">Antall<br>personer</label>
+							<input type="radio" name="antall" value="2" required>
+							2
+							<input type="radio" name="antall" value="3">
+							3
+							<input id="option-three" type="radio" name="antall" value="4">
+							4
+						</div>
+
+						<div class="pure-controls">
+							<label for="projektor" class="pure-checkbox">
+								<input type="checkbox" name="projektor" value="projektor"> Rom med projektor
+							</label>
+
+							<button type="submit" class="pure-button pure-button-primary">Søk rom</button>
+						</div>
+					</fieldset>
+				</form>
+			</div>
+		</section>
 	</body>
 	<script src="js/jquery.js">
 	</script>
