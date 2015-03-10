@@ -15,7 +15,7 @@ else {
 
     $subject = "Vennligst bekreft romreservasjon";
 
-    $message = $room . " " . " er holdt av for reservasjon av deg fra " . $from . " til " . $to . ". Bekreft romreservasjon ved å trykke på linken som er vedlagt." . "\n\n" . "www.home.nith.no/blablabla/confirmBooking?bookingToken=" . $_POST['generatedToken'] . "\n\n" . "Mvh Rom-booking Westerdals" ."\n\n\n\n" . "English: " . $room . " " . " is reserved by you from " . $from . " to " . $to . ". Confirm reservation by clicking the link above.";
+    $message = $room . " " . "er holdt av for reservasjon av deg fra " . $from . " til " . $to . ". Bekreft romreservasjon ved å trykke på linken som er vedlagt." . "\n\n" . "www.home.nith.no/blablabla/confirmBooking?bookingToken=" . $_POST['generatedToken'] . "\n\n" . "Mvh Rom-booking Westerdals" ."\n\n\n\n" . "English: " . $room . " " . " is reserved by you from " . $from . " to " . $to . ". Confirm reservation by clicking the link above.";
 
     $headers = "Content-type: text/html; charset=UTF-8\r\n";
     $headers .= "From:" . $from;
