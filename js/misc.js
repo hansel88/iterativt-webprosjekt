@@ -14,7 +14,9 @@
     data: $form.serialize() // serialiser skjemaet og legg det i post-bodyen
   };
 console.log($form.serialize());
+header('Location: php/registerBooking.php');
 
+/*
   $.when($.ajax(opts)).then(function() {
     // suksess - dvs 200 i respons fra server
     alert('hurra, vi har fått mailen din!');
@@ -25,4 +27,5 @@ console.log($form.serialize());
     // epic fail - dvs 500 i respons fra server
     alert('oj, noe gikk feil - skrev du feil epostadresse?')
   });
+ */
 });
