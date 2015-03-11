@@ -1,4 +1,3 @@
-
 <?php 
 // Sjekker om alt er fylt ut som det skal
 if(!isset($_POST['mailInput'], $_POST['roomNumber'], $_POST['fromDate'], $_POST['toDate'], $_POST['generatedToken'])) {

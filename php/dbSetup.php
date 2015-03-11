@@ -7,7 +7,7 @@ $sql = $database->prepare(
 $sql->execute();
 // Create the table: comments
 $sql = $database->prepare(
-	"CREATE TABLE room_reservation (room_nr varchar(255) NOT NULL,user_email varchar(255) NOT NULL, fromDate date NOT NULL, toDate date NOT NULL, token varchar(255) NOT NULL, PRIMARY KEY (id, token), FOREIGN KEY (room_nr) REFERENCES room(room_nr));"
+	"CREATE TABLE room_reservation (room_nr varchar(255) NOT NULL,user_email varchar(255) NOT NULL, fromDate datetime NOT NULL, toDate datetime NOT NULL, token varchar(255) NOT NULL, PRIMARY KEY (id, token), FOREIGN KEY (room_nr) REFERENCES room(room_nr));"
 );
 $sql->execute();
 // Add some example content to the database
