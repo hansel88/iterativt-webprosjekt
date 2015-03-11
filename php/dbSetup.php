@@ -14,7 +14,7 @@ $sql->execute();
 
 
 $sql = $database->prepare(
-	"INSERT INTO blog (header, content) VALUES (:room_nr, :projector, :size);"
+	"INSERT INTO room (room_nr, projector, size) VALUES (:room_nr, :projector, :size);"
 );
 $sql->execute(array(
 	'room_nr' => "Rom 24",
