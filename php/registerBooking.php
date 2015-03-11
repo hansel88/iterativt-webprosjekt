@@ -7,10 +7,11 @@ $sql->setFetchMode(PDO::FETCH_OBJ);
 $sql->execute();
 $room_numbers = $sql->fetch();
 */
-$from = $_GET['from'];
-$to = $_GET['to'];
+$from = $_GET['fromDate'];
+$to = $_GET['toDate'];
 $projector = $_GET['projector'];
 $size = $_GET['size'];
+$email = $_GET['email'];
 
 if($projector)
 {

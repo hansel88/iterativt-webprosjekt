@@ -22,8 +22,8 @@
 				<form class="pure-form pure-form-aligned" id="searchForm" name="searchForm" method="post">
 					<fieldset>
 						<div class="pure-control-group">
-							<label for="epost">Epost:</label>
-							<input type="email" name="epost" size="25" pattern=".+@student.westerdals.no" title="@student.westerdals.no" placeholder="bruker@student.westerdals.no" required>
+							<label for="email">Epost:</label>
+							<input type="email" name="email" size="25" pattern=".+@student.westerdals.no" title="@student.westerdals.no" placeholder="bruker@student.westerdals.no" required>
 						</div>
 						<!--
 						Dato: <input type="date" name="dato" required>
@@ -34,24 +34,24 @@
 
 						<div class="pure-control-group">
 							<label for="some_class_1">Fra:</label>
-							<input type="text" class="some_class" value="" id="some_class_1" size="25" required>
+							<input type="text" class="some_class" name="fromDate" value="" id="some_class_1" size="25" required>
 							<label for="some_class_2">Til:</label>
-							<input type="text" class="some_class" value="" id="some_class_2" size="25" required>
+							<input type="text" class="some_class" name="toDate" value="" id="some_class_2" size="25" required>
 						</div>
 
 						<div class="pure-control-group">
-							<label for="antall">Antall<br>personer</label>
-							<input type="radio" name="antall" value="2" required>
+							<label for="size">Antall<br>personer</label>
+							<input type="radio" name="size" value="2" required>
 							2
-							<input type="radio" name="antall" value="3">
+							<input type="radio" name="size" value="3">
 							3
-							<input id="option-three" type="radio" name="antall" value="4">
+							<input id="option-three" type="radio" name="size" value="4">
 							4
 						</div>
 
 						<div class="pure-controls">
-							<label for="projektor" class="pure-checkbox">
-								<input type="checkbox" name="projektor" value="projektor"> Rom med projektor
+							<label for="projector" class="pure-checkbox">
+								<input type="checkbox" name="projector" value="projector"> Rom med projektor
 							</label>
 
 							<button type="submit" class="pure-button pure-button-primary">Søk rom</button>
