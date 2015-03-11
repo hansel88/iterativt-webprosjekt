@@ -29,3 +29,5 @@ else{
 }
 
 $possibleRooms = $sql->fetch();
+
+/* todo: code to retrieve rooms available in given period */
