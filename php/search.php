@@ -10,25 +10,30 @@ $room_numbers = $sql->fetch();
 
 $from = $_POST['fromDate'];
 $to = $_POST['toDate'];
-$projector = $_POST['projector'];	
+$projector = false;
+if (isset($_POST['projector'])) $projector = true;
 $size = $_POST['size'];
 $email = $_POST['email'];
 
 
 if($projector)
 {
-	$sql = $database->prepare("select * from room where size >=:size and :projector = true");
+	$sql = $database->prepare("SELECT * FROM room WHERE size >=:size AND :projector = true AND room_nr NOT IN (SELECT room_nr FROM room_reservation WHERE :from NOT BETWEEN fromDate AND toDate OR :to NOT BETWEEN fromDate AND toDate) ORDER BY size, room_nr");
 	$sql->setFetchMode(PDO::FETCH_OBJ);
 	$sql->execute(array(
 		'size' => $size,
-		'projector' => $projector
+		'projector' => $projector,
+		'from' => $from,
+		'to' => $to
 	));
 }
 else{
-	$sql = $database->prepare("select * from room where size >=:size");
+	$sql = $database->prepare("SELECT * FROM room WHERE size >=:size AND room_nr NOT IN (SELECT room_nr FROM room_reservation WHERE :from NOT BETWEEN fromDate AND toDate OR :to NOT BETWEEN fromDate AND toDate) ORDER BY projector, size, room_nr");
 	$sql->setFetchMode(PDO::FETCH_OBJ);
 	$sql->execute(array(
 		'size' => $size,
+		'from' => $from,
+		'to' => $to
 	));
 }
 
