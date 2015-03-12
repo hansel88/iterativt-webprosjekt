@@ -9,23 +9,23 @@
 
   // lag et options-objekt som gir info til $.ajax etterpå
   var opts = {
-    url: 'php/registerBooking.php', // send ajax-request til denne filen
+    url: 'php/search.php', // send ajax-request til denne filen
     type: 'POST', // http-verb
     data: $form.serialize() // serialiser skjemaet og legg det i post-bodyen
   };
 console.log($form.serialize());
-header('Location: php/registerBooking.php');
+//header('Location: php/registerBooking.php');
 
-/*
+
   $.when($.ajax(opts)).then(function() {
     // suksess - dvs 200 i respons fra server
-    alert('hurra, vi har fått mailen din!');
     $( '#searchForm' ).each(function(){
     this.reset();
 });
+    window.location.href="php/search.php";
   }, function() {
     // epic fail - dvs 500 i respons fra server
-    alert('oj, noe gikk feil - skrev du feil epostadresse?')
+    alert('oj, noe gikk feil. Fylte du inn alle feltene?')
   });
- */
+ 
 });
