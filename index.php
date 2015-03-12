@@ -1,5 +1,5 @@
 <?php
- include 'php/header.php';
+ include 'php/indexHeader.php';
  ?>
 		<div id="logo">
 			<a href="http://www.westerdals.no/">
