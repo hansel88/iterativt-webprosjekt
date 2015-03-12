@@ -15,7 +15,6 @@ $size = $_POST['size'];
 $email = $_POST['email'];
 
 
-
 if($projector)
 {
 	$sql = $database->prepare("select * from room where size >=:size and :projector = true");
