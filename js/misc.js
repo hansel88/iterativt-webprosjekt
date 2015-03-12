@@ -22,7 +22,7 @@ console.log($form.serialize());
     $( '#searchForm' ).each(function(){
     this.reset();
 });
-    window.location.href="php/search.php";
+   // window.location.href="php/search.php";
   }, function() {
     // epic fail - dvs 500 i respons fra server
     alert('oj, noe gikk feil. Fylte du inn alle feltene?')

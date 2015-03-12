@@ -7,27 +7,30 @@ $sql->setFetchMode(PDO::FETCH_OBJ);
 $sql->execute();
 $room_numbers = $sql->fetch();
 */
+
 $from = $_POST['fromDate'];
 $to = $_POST['toDate'];
-$projector = $_POST['projector'];
+$projector = $_POST['projector'];	
 $size = $_POST['size'];
 $email = $_POST['email'];
 
-echo $_POST;
+
 
 if($projector)
 {
 	$sql = $database->prepare("select * from room where size >=:size and :projector = true");
 	$sql->setFetchMode(PDO::FETCH_OBJ);
-	'size' => $size,
-	'projector' => $projector
-));
+	$sql->execute(array(
+		'size' => $size,
+		'projector' => $projector
+	));
 }
 else{
 	$sql = $database->prepare("select * from room where size >=:size");
 	$sql->setFetchMode(PDO::FETCH_OBJ);
-	'size' => size
-));
+	$sql->execute(array(
+		'size' => $size,
+	));
 }
 
 $sql->execute();
@@ -36,7 +39,6 @@ if (!$sql->fetch())
 {
 	echo '<p>Det er desverre ingen ledige rom i dette tidsrommet</p>';
 }
-
 else
 {
 	$i = 1;
@@ -48,7 +50,7 @@ else
 		echo '<input type="radio" name="option" value="' . $i . '" required><tr><td>' . $possibleRooms->room_nr . '</td><td>' . $possibleRooms->fromDate . '</td><td>' . $possibleRooms->toDate . '</td><td>' . $proj . '</td></tr>';
 		$i++;
 	}
-	echo '</table></form>'
+	echo '</table></form>';
 }
 
 
