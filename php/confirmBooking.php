@@ -2,12 +2,12 @@
 
 require 'config.php';
 
-$token = $_GET['token'];
+$token = isset($_GET['token']) ? $_GET['token'] : '';
 
 if($token == "")
 {
 // no username entered
-echo "Noe gikk galt.";
+	echo "Noe gikk galt.";
 }
 else
 {
@@ -29,3 +29,4 @@ else
 
 		echo '<p>Reservasjonen din er bekreftet</p>';
 	}
+}
