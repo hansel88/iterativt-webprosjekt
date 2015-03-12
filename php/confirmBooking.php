@@ -1,6 +1,7 @@
 <?php
 
 require 'config.php';
+include 'header.php';
 
 $token = isset($_GET['token']) ? $_GET['token'] : '';
 
@@ -30,3 +31,5 @@ else
 		echo '<p>Reservasjonen din er bekreftet</p>';
 	}
 }
+
+ include 'footer.php';

@@ -1,14 +1,6 @@
-<!doctype html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title>Gruppe 27</title>
-		<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
-		<link rel="stylesheet" href="css/main.css">
-		<link rel="stylesheet" href="css/jquery.datetimepicker.css">
-	</head>
-
-	<body>
+<?php
+ include 'php/header.php';
+ ?>
 		<div id="logo">
 			<a href="http://www.westerdals.no/">
 				<img id="logobilde" src="img/logo.jpg" alt="logo">
@@ -60,7 +52,6 @@
 				</form>
 			</div>
 		</section>
-	</body>
 	<script src="js/jquery.js">
 	</script>
 	<script src="js/jquery.datetimepicker.js">
@@ -69,5 +60,7 @@
 	</script>
 	<script src="js/misc.js">
 	</script
-</html>
+
+	 <?php include 'php/footer.php'; ?>
+
 <!-- Gruppe 27 -->
