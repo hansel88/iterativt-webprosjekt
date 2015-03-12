@@ -16,7 +16,7 @@ $size = $_POST['size'];
 $email = $_POST['email'];
 
 
-if($projector)
+if($projector == true)
 {
 	$sql = $database->prepare("SELECT * FROM room WHERE size >=:size AND :projector = true AND room_nr NOT IN (SELECT room_nr FROM room_reservation WHERE :from NOT BETWEEN fromDate AND toDate OR :to NOT BETWEEN fromDate AND toDate) ORDER BY size, room_nr");
 	$sql->setFetchMode(PDO::FETCH_OBJ);
@@ -51,7 +51,7 @@ else
 	{
 		$proj = 'Nei';
 		if ($sql->projector = true) $proj = 'Ja';
-		echo '<input type="radio" name="option" value="' . $i . '" required><tr><td>' . $possibleRooms->room_nr . '</td><td>' . $possibleRooms->fromDate . '</td><td>' . $possibleRooms->toDate . '</td><td>' . $proj . '</td></tr>';
+		echo '<input type="radio" name="option" value="' . $i . '" required><tr><td>' . $possibleRooms->room_nr . '</td><td>' . $from . '</td><td>' . $to . '</td><td>' . $proj . '</td></tr>';
 		$i++;
 	}
 	echo '</table></form>';
