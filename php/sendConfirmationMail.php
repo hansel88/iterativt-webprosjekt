@@ -3,7 +3,7 @@ require 'config.php';
 require 'header.php';
 
 // Sjekker om alt er fylt ut som det skal
-if(!isset($_SESSION['mail'], $_POST['room'], $_SESSION['fromDate'], $_SESSION['toDate']) {
+if(!isset($_SESSION['mail'], $_POST['room'], $_SESSION['fromDate'], $_SESSION['toDate'])) {
     http_response_code(400); // 400 bad request
     exit();
 }
@@ -35,6 +35,7 @@ else {
     $headers .= "From:" . $from;
     if(mail($to,$subject,$message,$headers)) {
         http_response_code(200);  // mail ble sendt, all is well
+        echo '<section id=wrapper><h1>Rom satt av</h1><p>Rommet er nå satt av, for å fullføre bestillingen må du følge instruksjonene fått på mail.</p></submit>';
         exit();
     }
     else
@@ -44,7 +45,7 @@ else {
     }
 }
 
-echo '<section id=wrapper><h1>Rom satt av</h1><p>Rommet er nå satt av, for å fullføre bestillingen må du følge instruksjonene fått på mail.</p></submit>'
+
 require 'footer.php';
 session_destroy();
 ?>
