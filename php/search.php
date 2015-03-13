@@ -19,7 +19,7 @@ $_SESSION['email'] = $email;
 
 if(isset($_POST['projector']) && $_POST['projector'] == 'projector')
 {
-	$sql = $database->prepare("SELECT * FROM room WHERE size >= :size AND projector = true AND room_nr NOT IN (SELECT room_nr FROM room_reservation WHERE :from NOT BETWEEN fromDate AND toDate OR :to NOT BETWEEN fromDate AND toDate) ORDER BY size, room_nr");
+	$sql = $database->prepare("SELECT * FROM room WHERE size >= :size AND projector = 1 AND room_nr NOT IN (SELECT room_nr FROM room_reservation WHERE :from NOT BETWEEN fromDate AND toDate OR :to NOT BETWEEN fromDate AND toDate) ORDER BY size, room_nr");
 }
 else{
 	$sql = $database->prepare("SELECT * FROM room WHERE size >= :size AND room_nr NOT IN (SELECT room_nr FROM room_reservation WHERE :from NOT BETWEEN fromDate AND toDate OR :to NOT BETWEEN fromDate AND toDate) ORDER BY projector, size, room_nr");
@@ -43,7 +43,7 @@ else
 	while ($possibleRooms = $sql->fetch())
 	{
 		$proj = 'Nei';
-		if ($sql->projector = true) $proj = 'Ja';
+		if ($sql->projector = 1) $proj = 'Ja';
 		echo '<tr><td><input type="radio" name="room" value="' . $possibleRooms->room_nr . '" required></td><td>' . $possibleRooms->room_nr . '</td><td>' . substr($from, 0, 10) . '</td><td>' . substr($from, -5) . '</td><td>' . substr($to, -5) . '</td><td>' . $proj . '</td></tr>';
 	}
 	echo '</table><button id="chooseRoomSubmit" type="submit" class="pure-button pure-button-primary">Velg rom</button></form>';

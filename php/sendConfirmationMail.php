@@ -4,12 +4,12 @@ require 'config.php';
 require 'header.php';
 
 // Sjekker om alt er fylt ut som det skal
-if(!isset($_SESSION['mail'], $_POST['room'], $_SESSION['fromDate'], $_SESSION['toDate'])) {
+if(!isset($_SESSION['email'], $_POST['room'], $_SESSION['fromDate'], $_SESSION['toDate'])) {
     http_response_code(400); // 400 bad request
     exit();
 }
 else {
-    $to = $_SESSION['mail']; 
+    $to = $_SESSION['email']; 
     $token = uniqid(mt_rand(), true);
     echo $token;
     $from = "no-reply@room-booking.westerdals.no";
@@ -30,7 +30,7 @@ else {
 
     $subject = "Vennligst bekreft romreservasjon";
 
-    $message = $room . " " . "er holdt av for reservasjon av deg fra " . $from . " til " . $to . ". Bekreft romreservasjon ved å trykke på linken som er vedlagt." . "\n\n" . "www.home.nith.no/blablabla/confirmBooking?bookingToken=" . $_POST['generatedToken'] . "\n\n" . "Mvh Rom-booking Westerdals" ."\n\n\n\n" . "English: " . $room . " " . " is reserved by you from " . $from . " to " . $to . ". Confirm reservation by clicking the link above.";
+    $message = $room . " " . "er holdt av for reservasjon av deg fra " . $from . " til " . $to . ". Bekreft romreservasjon ved å trykke på linken som er vedlagt." . "\n\n" . "www.home.nith.no/blablabla/confirmBooking?bookingToken=" . $token . "\n\n" . "Mvh Rom-booking Westerdals" ."\n\n\n\n" . "English: " . $room . " " . " is reserved by you from " . $from . " to " . $to . ". Confirm reservation by clicking the link above.";
 
     $headers = "Content-type: text/html; charset=UTF-8\r\n";
     $headers .= "From:" . $from;
