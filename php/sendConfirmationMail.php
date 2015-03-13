@@ -37,7 +37,7 @@ else {
     $message .= '<p>For kansellering av rom, åpne denne linken: ';
     $message .= '<a href="http://www.htodap.com/itw/php/cancelBooking.php?token=' . $token . '"' . 'style=\"margin-left: 20px; text-decoration: none; padding: 8px; background-color: #E02F1C; color: white;\">Kansellèr Booking</a>';
     $message .= '<p>Med vennlig hilsen Rom-booking Westerdals</p>';
-    $message .= "<p>English: Room" . $room . " " . " is reserved by you from " . $from . " to " . $to . ". Confirm reservation by clicking the first link above. Cancel reservation by opening the second one.</p>";
+    $message .= "<p>English: Room" . $room . " " . " is reserved by you from " . $fromDate . " to " . $toDate . ". Confirm reservation by clicking the first link above. Cancel reservation by opening the second one.</p>";
     $message .= '</body></html>';
 
     $headers .= "MIME-Version: 1.0\r\n";
