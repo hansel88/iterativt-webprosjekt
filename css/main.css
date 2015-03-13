@@ -39,8 +39,26 @@ h1
 	right: 50px;
 }
 
-#infoText
+table
+{
+	margin: 0 auto;
+	border-collapse: collapse;
+}
+
+table, th, td
+{
+	border: 1px solid black;
+	text-align: center;
+}
+
+th, td
+{
+	padding: 2px 5px;
+}
+
+#chooseRoomSubmit
 {
 	position: relative;
-	margin: 0px auto;
+	top: 10px;
+	left: 150px;
 }

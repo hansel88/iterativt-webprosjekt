@@ -7,7 +7,7 @@ $sql = $database->prepare(
 $sql->execute();
 // Create the table: comments
 $sql = $database->prepare(
-	"CREATE TABLE IF NOT EXISTS room_reservation (room_nr int NOT NULL,user_email varchar(255) NOT NULL, fromDate datetime NOT NULL, toDate datetime NOT NULL, token varchar(255) NOT NULL, confirmed boolean, PRIMARY KEY (room_nr, token), FOREIGN KEY (room_nr) REFERENCES room(room_nr));"
+	"CREATE TABLE IF NOT EXISTS room_reservation (id int NOT NULL AUTO_INCREMENT, room_nr int NOT NULL, user_email varchar(255) NOT NULL, fromDate datetime NOT NULL, toDate datetime NOT NULL, token varchar(255) NOT NULL, confirmed boolean, PRIMARY KEY (id), FOREIGN KEY (room_nr) REFERENCES room(room_nr));"
 );
 $sql->execute();
 
@@ -23,7 +23,7 @@ $sql->execute(array(
 ));
 
 $sql = $database->prepare(
-	"INSERT INTO roomn (room_nr, projector, size) VALUES (:room_nr, :projector, :size);"
+	"INSERT INTO room (room_nr, projector, size) VALUES (:room_nr, :projector, :size);"
 );
 $sql->execute(array(
 	'room_nr' => 38,

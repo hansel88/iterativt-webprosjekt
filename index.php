@@ -31,7 +31,7 @@
 							2
 							<input type="radio" name="size" value="3">
 							3
-							<input id="option-three" type="radio" name="size" value="4">
+							<input type="radio" name="size" value="4">
 							4
 						</div>
 
