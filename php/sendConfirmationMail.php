@@ -1,4 +1,5 @@
-<?php 
+<?php
+session_start();
 require 'config.php';
 require 'header.php';
 
@@ -44,8 +45,7 @@ else {
         exit();
     }
 }
-
-
 require 'footer.php';
+session_unset();
 session_destroy();
 ?>
