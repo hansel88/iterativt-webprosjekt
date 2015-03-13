@@ -37,3 +37,27 @@ h1
 	position: relative;
 	right: 50px;
 }
+
+table
+{
+	margin: 0 auto;
+	border-collapse: collapse;
+}
+
+table, th, td
+{
+	border: 1px solid black;
+	text-align: center;
+}
+
+th, td
+{
+	padding: 2px 5px;
+}
+
+#chooseRoomSubmit
+{
+	position: relative;
+	top: 10px;
+	left: 150px;
+}

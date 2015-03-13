@@ -1,16 +1,31 @@
 <?php 
+require 'config.php';
+require 'header.php';
+
 // Sjekker om alt er fylt ut som det skal
-if(!isset($_POST['mailInput'], $_POST['roomNumber'], $_POST['fromDate'], $_POST['toDate'], $_POST['generatedToken'])) {
+if(!isset($_SESSION['mail'], $_POST['room'], $_SESSION['fromDate'], $_SESSION['toDate']) {
     http_response_code(400); // 400 bad request
     exit();
 }
 else {
-    $to = $_POST['mailInput']; 
-
+    $to = $_SESSION['mail']; 
+    $token = uniqid(mt_rand(), true);
+    echo $token;
     $from = "no-reply@room-booking.westerdals.no";
-    $room = $_POST['roomNumber'];
-    $fromDate = $_POST['fromDate'];
-    $toDate = $_POST['toDate'];
+    $room = $_POST['room'];
+    $fromDate = $_SESSION['fromDate'];
+    $toDate = $_SESSION['toDate'];
+
+    $sql = $database->prepare(
+    "INSERT INTO room_reservation (room_nr, user_email, fromDate, toDate, token, confirmed) VALUES (:room_nr, :user_email, :fromDate, :toDate, :token, 0);"
+    );
+    $sql->execute(array(
+        'room_nr' => $room,
+        'user_email' => $to,
+        'fromDate' => $fromDate,
+        'toDate' => $toDate,
+        'token' => $token
+    ));
 
     $subject = "Vennligst bekreft romreservasjon";
 
@@ -28,4 +43,8 @@ else {
         exit();
     }
 }
+
+echo '<section id=wrapper><h1>Rom satt av</h1><p>Rommet er nå satt av, for å fullføre bestillingen må du følge instruksjonene fått på mail.</p></submit>'
+require 'footer.php';
+session_destroy();
 ?>

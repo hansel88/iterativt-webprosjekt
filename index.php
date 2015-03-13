@@ -1,12 +1,6 @@
 <?php
  include 'php/indexHeader.php';
  ?>
-		<div id="logo">
-			<a href="http://www.westerdals.no/">
-				<img id="logobilde" src="img/logo.jpg" alt="logo">
-			</a>
-		</div>
-
 		<section id="wrapper">
 			<h1>Rom-booking</h1>
 
@@ -37,7 +31,7 @@
 							2
 							<input type="radio" name="size" value="3">
 							3
-							<input id="option-three" type="radio" name="size" value="4">
+							<input type="radio" name="size" value="4">
 							4
 						</div>
 
