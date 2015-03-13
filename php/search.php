@@ -12,8 +12,8 @@ $size = $_POST['size'];
 $email = $_POST['email'];
 
 session_start();
-$_SESSION['from'] = $from;
-$_SESSION['to'] = $to;
+$_SESSION['fromDate'] = $from;
+$_SESSION['toDate'] = $to;
 $_SESSION['email'] = $email;
 
 
@@ -44,7 +44,7 @@ else
 	{
 		$proj = 'Nei';
 		if ($sql->projector = true) $proj = 'Ja';
-		echo '<tr><td><input type="radio" name="option" value="' . $possibleRooms->room_nr . '" required></td><td>' . $possibleRooms->room_nr . '</td><td>' . substr($from, 0, 10) . '</td><td>' . substr($from, -5) . '</td><td>' . substr($to, -5) . '</td><td>' . $proj . '</td></tr>';
+		echo '<tr><td><input type="radio" name="room" value="' . $possibleRooms->room_nr . '" required></td><td>' . $possibleRooms->room_nr . '</td><td>' . substr($from, 0, 10) . '</td><td>' . substr($from, -5) . '</td><td>' . substr($to, -5) . '</td><td>' . $proj . '</td></tr>';
 	}
 	echo '</table><button id="chooseRoomSubmit" type="submit" class="pure-button pure-button-primary">Velg rom</button></form>';
 }
