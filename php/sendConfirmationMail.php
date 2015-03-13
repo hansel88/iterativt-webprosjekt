@@ -32,11 +32,11 @@ else {
 
     $message = '<html><body>';
     $message .= '<h3>Hei, ' .$to . '</h3>';
-    $message .= '<p>' .  $room . " " . "er holdt av for reservasjon av deg fra " . $from . " til " . $to . ". Bekreft romreservasjon ved å trykke på linken som er vedlagt.<p>";
-    $message .= 'Link: ' . 'www.htodap.com/itw/php/confirmBooking?token=' . $token . '<br /><br />';
-    $message .= 'For kansellering av rom, åpne denne linken: ' . 'www.htodap.com/itw/php/cancelBooking.php?token=' . $token . '<br /></ br>';
-    $message .= 'Med vennlig hilsen Rom-booking Westerdals';
-    $message .= "English: " . $room . " " . " is reserved by you from " . $from . " to " . $to . ". Confirm reservation by clicking the link above.";
+    $message .= '<p>Rom ' .  $room . " " . "er holdt av for reservasjon av deg fra " . $fromDate . " til " . $toDate . ". Bekreft romreservasjon ved å trykke på linken som er vedlagt.<p>";
+    $message .= 'Link: ' . 'www.htodap.com/itw/php/confirmBooking.php?token=' . $token . '<br /><br />';
+    $message .= '<p>For kansellering av rom, åpne denne linken: ' . 'www.htodap.com/itw/php/cancelBooking.php?token=' . $token . '</p><br />';
+    $message .= '<p>Med vennlig hilsen Rom-booking Westerdals</p>';
+    $message .= "<p>English: Room" . $room . " " . " is reserved by you from " . $from . " to " . $to . ". Confirm reservation by clicking the link above.</p>";
     $message .= '</body></html>';
 
     $headers .= "MIME-Version: 1.0\r\n";
