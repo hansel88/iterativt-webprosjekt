@@ -10,7 +10,7 @@ $token = isset($_GET['token']) ? $_GET['token'] : '';
 
 if($token == "")
 {
-	echo '<p>Vi kunne ikke finne reservasjonen din.</p>';
+	echo '<p id="infoText">Vi kunne ikke finne reservasjonen din.</p>';
 }
 else
 {
@@ -22,7 +22,7 @@ else
 
 	if (!$sql->fetch())
 	{
-		echo '<p>Vi kunne ikke finne reservasjonen din.</p>';
+		echo '<p id="infoText>Vi kunne ikke finne reservasjonen din.</p>';
 	}
 	else
 	{
@@ -32,7 +32,7 @@ else
 		$sql->execute(array(
 			'token' => $token
 		));
-		echo '<p>Reservasjonen din er nå kansellert.</p>';
+		echo '<p id="infoText>Reservasjonen din er nå kansellert.</p>';
 
 	}
 }

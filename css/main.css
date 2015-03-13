@@ -11,6 +11,7 @@ body
 	height: 350px;
 	overflow: hidden;
 	border: 3px solid black;
+	padding: 5px;
 }
 
 #logo
@@ -36,4 +37,10 @@ h1
 	width: 500px;
 	position: relative;
 	right: 50px;
+}
+
+#infoText
+{
+	position: relative;
+	margin: 0px auto;
 }
