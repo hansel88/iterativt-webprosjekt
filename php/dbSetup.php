@@ -23,7 +23,7 @@ $sql->execute(array(
 ));
 
 $sql = $database->prepare(
-	"INSERT INTO roomn (room_nr, projector, size) VALUES (:room_nr, :projector, :size);"
+	"INSERT INTO room (room_nr, projector, size) VALUES (:room_nr, :projector, :size);"
 );
 $sql->execute(array(
 	'room_nr' => 38,
