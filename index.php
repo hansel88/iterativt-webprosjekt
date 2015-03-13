@@ -37,7 +37,7 @@
 
 						<div class="pure-controls">
 							<label for="projector" class="pure-checkbox">
-								<input type="checkbox" name="projector" value="projector"> Rom med projektor
+								<input type="checkbox" name="projector" value="yes"> Rom med projektor
 							</label>
 
 							<button type="submit" class="pure-button pure-button-primary">Søk rom</button>
