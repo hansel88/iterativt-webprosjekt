@@ -30,9 +30,17 @@ else {
 
     $subject = "Vennligst bekreft romreservasjon";
 
-    $message = $room . " " . "er holdt av for reservasjon av deg fra " . $from . " til " . $to . ". Bekreft romreservasjon ved å trykke på linken som er vedlagt." . "\n\n" . "www.home.nith.no/blablabla/confirmBooking?bookingToken=" . $token . "\n\n" . "Mvh Rom-booking Westerdals" ."\n\n\n\n" . "English: " . $room . " " . " is reserved by you from " . $from . " to " . $to . ". Confirm reservation by clicking the link above.";
+    $message = '<html><body>';
+    $message .= '<h3>Hei, ' .$to . '</h3>';
+    $message .= '<p>' .  $room . " " . "er holdt av for reservasjon av deg fra " . $from . " til " . $to . ". Bekreft romreservasjon ved å trykke på linken som er vedlagt.<p>";
+    $message .= 'Link: ' . 'www.htodap.com/itw/php/confirmBooking?token=' . $token . '<br /><br />';
+    $message .= 'For kansellering av rom, åpne denne linken: ' . 'www.htodap.com/itw/php/cancelBooking.php?token=' . $token . '<br /></ br>';
+    $message .= 'Med vennlig hilsen Rom-booking Westerdals';
+    $message .= "English: " . $room . " " . " is reserved by you from " . $from . " to " . $to . ". Confirm reservation by clicking the link above.";
+    $message .= '</body></html>';
 
-    $headers = "Content-type: text/html; charset=UTF-8\r\n";
+    $headers .= "MIME-Version: 1.0\r\n";
+    $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
     $headers .= "From:" . $from;
     if(mail($to,$subject,$message,$headers)) {
         http_response_code(200);  // mail ble sendt, all is well
