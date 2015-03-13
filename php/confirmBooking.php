@@ -12,10 +12,10 @@ if($token == "")
 }
 else
 {
-	$sql = $database->prepare("select * from room_reservation where generatedToken = :token");
+	$sql = $database->prepare("select * from room_reservation where token = :token");
 	$sql->setFetchMode(PDO::FETCH_OBJ);
 	$sql->execute(array(
-		'generatedToken' => $token
+		'token' => $token
 	));
 
 	if (!$sql->fetch())
@@ -24,9 +24,12 @@ else
 	}
 	else
 	{
-		$reservation = $sql.fetch();
-		$sql = $database->prepare("update table from room_reservation set confirmed = true where generatedToken = :token");
-		$sql->execute();
+		$reservation = $sql->fetch();
+		$sql = $database->prepare("update room_reservation set confirmed = 1 where token = :token");
+		$sql->execute(array(
+			'token' => $token
+		));
+
 
 		echo '<p>Reservasjonen din er bekreftet</p>';
 	}
