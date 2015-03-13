@@ -46,6 +46,9 @@
 				</form>
 			</div>
 		</section>
+
+		<a href="http://www.htodap.com/itw/php/cancelBooking.php?token="style="margin-left: 20px; text-decoration: none; padding: 8px; background-color: #E02F1C; color: white;">Kansellèr Booking</a>
+		<a href="http://www.htodap.com/itw/php/cancelBooking.php?token=" style="margin-left: 20px; text-decoration: none; padding: 8px; background-color: #5A9E23; color: white;">Bekreft Booking</a>
 	<script src="js/jquery.js">
 	</script>
 	<script src="js/jquery.datetimepicker.js">
@@ -53,7 +56,7 @@
 	<script src="js/datetimeconfig.js">
 	</script>
 	<script src="js/misc.js">
-	</script
+	</script>
 
 	 <?php include 'php/footer.php'; ?>
 
