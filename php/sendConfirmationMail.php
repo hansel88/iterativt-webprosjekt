@@ -1,4 +1,5 @@
-<?php 
+<?php
+session_start();
 require 'config.php';
 require 'header.php';
 
@@ -46,5 +47,6 @@ else {
 
 echo '<section id=wrapper><h1>Rom satt av</h1><p>Rommet er nå satt av, for å fullføre bestillingen må du følge instruksjonene fått på mail.</p></submit>';
 require 'footer.php';
+session_unset();
 session_destroy();
 ?>

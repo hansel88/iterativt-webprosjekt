@@ -1,4 +1,5 @@
 <?php
+session_start();
 require 'config.php';
 require 'header.php';
 
@@ -11,7 +12,6 @@ $to = $_POST['toDate'];
 $size = $_POST['size'];
 $email = $_POST['email'];
 
-session_start();
 $_SESSION['fromDate'] = $from;
 $_SESSION['toDate'] = $to;
 $_SESSION['email'] = $email;
