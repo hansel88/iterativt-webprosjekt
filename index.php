@@ -9,7 +9,7 @@
 						Dato: <input type="date" name="dato" required>
 						<br>
 						Fra <input type="time" name="ftid" required>
-						til <input type="time" name="ttid" required>
+						til <input type="time" name="ttid" required> 
 						-->
 
                 <div class="pure-control-group">
