@@ -4,14 +4,22 @@ body
 	background-color: rgb(255, 255, 255);
 }
 
+@-webkit-viewport {
+    zoom: 1.0;
+    width: extend-to-zoom;
+    min-height: 200px;
+    min-width: 200px;
+}
+
 #wrapper
 {
-	margin: 10px auto;
-	width: 400px;
-	height: 350px;
-	overflow: hidden;
+    position: relative;
+	margin: auto;
+	height: 500px;
+    overflow: hidden;
 	border: 3px solid black;
 	padding: 5px;
+    width: 450px;
 }
 
 #logo
@@ -33,15 +41,15 @@ h1
 
 #form
 {
-	height: 300px;
-	width: 500px;
-	position: relative;
-	right: 50px;
+    height: 500px;
+    width: 400px;
+	position: absolute;
+    left: -20px;
 }
 
 table
 {
-	margin: 0 auto;
+	margin: 1 auto;
 	border-collapse: collapse;
 }
 
@@ -56,9 +64,44 @@ th, td
 	padding: 2px 5px;
 }
 
-#chooseRoomSubmit
-{
-	position: relative;
-	top: 10px;
-	left: 150px;
+
+.pure-control-group {
+    position: absolute;
+    height: 64px;
+    top: 20px;
+    left: 120px;
 }
+
+.pure-control-group1 {
+    position: absolute;
+    height: 72px;
+    width: 281px;
+    top: 100px;
+    left: 120px;
+}
+
+.pure-control-group2 {
+    position: absolute;
+    height: 72px;
+    width: 300px;
+    top: 250px;
+    left: 150px;
+}
+.pure-checkbox {
+    position: absolute;
+    height: 36px;
+    width: 500px;
+    top: 300px;
+    left: 170px;
+}
+.pure-button-primary {
+    position: absolute;
+    top: 360px;
+    left: 200px;
+}
+
+
+
+
+
+

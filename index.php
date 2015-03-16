@@ -18,15 +18,15 @@
 						til <input type="time" name="ttid" required>
 						-->
 
-						<div class="pure-control-group">
+						<div class="pure-control-group1">
 							<label for="some_class_1">Fra:</label>
 							<input type="text" class="some_class" name="fromDate" value="" id="fromDate" size="25" required>
 							<label for="some_class_2">Til:</label>
 							<input type="text" class="some_class" name="toDate" value="" id="toDate" size="25" required>
 						</div>
 
-						<div class="pure-control-group">
-							<label for="size">Antall<br>personer</label>
+						<div class="pure-control-group2">
+							<label for="size">Antall personer: </label>
 							<input type="radio" name="size" value="2" required>
 							2
 							<input type="radio" name="size" value="3">
