@@ -5,21 +5,28 @@ require 'header.php';
 
 ?>
 		<section id="wrapper">
-			<h1>Velg rom</h1>
+			<h1>Velg tidspunkt</h1>
 <?php
 $from = $_POST['fromDate'];
 $to = $_POST['toDate'];
+//$hours = $_POST['hours'];
 $size = $_POST['size'];
 $email = $_POST['email'];
 
+/*
+echo '<p> ballefrans</p>';
+$faen = 'start:' . $from . ' end: ' . $to;
+echo $faen;
+*/
+
 $_SESSION['fromDate'] = $from;
-$_SESSION['toDate'] = $to;
+$_SESSION['toDate'] = $to; //fromDate + hours
 $_SESSION['email'] = $email;
 
 
 if(isset($_POST['projector']) && $_POST['projector'] == 'yes')
 {
-	$sql = $database->prepare("SELECT * FROM room WHERE size >= :size AND projector = 1 AND room_nr NOT IN (SELECT room_nr FROM room_reservation WHERE :from NOT BETWEEN fromDate AND toDate OR :to NOT BETWEEN fromDate AND toDate) ORDER BY size, room_nr");
+	$sql = $database->prepare("SELECT * FROM room WHERE size >= :size AND projector = 1 AND room_nr NOT IN (SELECT room_nr FROM room_reservation WHERE :from NOT BETWEEN fromDate AND DATE_ADD(fromDate,INTERVAL :hours HOUR) OR :to NOT BETWEEN fromDate AND toDate) ORDER BY size, room_nr");
 } else {
 	$sql = $database->prepare("SELECT * FROM room WHERE size >= :size AND room_nr NOT IN (SELECT room_nr FROM room_reservation WHERE :from NOT BETWEEN fromDate AND toDate OR :to NOT BETWEEN fromDate AND toDate) ORDER BY projector, size, room_nr");
 }
@@ -27,7 +34,7 @@ $sql->setFetchMode(PDO::FETCH_OBJ);
 $sql->execute(array(
 	'size' => $size,
 	'from' => $from,
-	'to' => $to
+	'hours' => $hours
 ));
 
 $possibleRooms = $sql->fetch();
