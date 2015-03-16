@@ -23,13 +23,31 @@ $_SESSION['fromDate'] = $from;
 $_SESSION['toDate'] = $to; //fromDate + hours
 $_SESSION['email'] = $email;
 
+if(isset($_POST['projector']) && $_POST['projector'] == 'yes')
+{
+	$sql = $database->prepare("SELECT * FROM room WHERE size >= :size AND projector = 1 ORDER BY size, room_nr");
+} else {
+	$sql = $database->prepare("SELECT * FROM room WHERE size >= :size");
+}
+$sql->setFetchMode(PDO::FETCH_OBJ);
+$sql->execute(array(
+	'size' => $size,
+	'from' => $from
+));
+$possibleRooms = $sql->fetch();
 
+print_r($possibleRooms);
+
+$sql = $database->prepare("SELECT * FROM room_reservation WHERE size >= :size AND projector = 1 ORDER BY size, room_nr");
+
+/*
 if(isset($_POST['projector']) && $_POST['projector'] == 'yes')
 {
 	$sql = $database->prepare("SELECT * FROM room WHERE size >= :size AND projector = 1 AND room_nr NOT IN (SELECT room_nr FROM room_reservation WHERE :from NOT BETWEEN fromDate AND DATE_ADD(fromDate,INTERVAL :hours HOUR) OR :to NOT BETWEEN fromDate AND toDate) ORDER BY size, room_nr");
 } else {
 	$sql = $database->prepare("SELECT * FROM room WHERE size >= :size AND room_nr NOT IN (SELECT room_nr FROM room_reservation WHERE :from NOT BETWEEN fromDate AND toDate OR :to NOT BETWEEN fromDate AND toDate) ORDER BY projector, size, room_nr");
 }
+
 $sql->setFetchMode(PDO::FETCH_OBJ);
 $sql->execute(array(
 	'size' => $size,
@@ -38,6 +56,7 @@ $sql->execute(array(
 ));
 
 $possibleRooms = $sql->fetch();
+*/
 
 if (!$possibleRooms)
 {
