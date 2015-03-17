@@ -21,16 +21,9 @@ else
 		if (isset($_GET['token']) && $_GET['token'] != "")
 		{
 			$token = $_GET['token'];
-
-			if (isset($_GET['cancel']) && $_GET['cancel'] == 1)
-			{
-				cancelBooking($id, $token);
-			}
-			else
-			{
-				confirmBooking($id, $token);
-				echo '<br><a href="http://www.htodap.com/itw/php/cancelBooking.php?id ' . $id . '&token=' . $token . ' &cancel=1"' . 'style="margin-left: 20px; text-decoration: none; padding: 8px; background-color: #E02F1C; color: white;\">Kansellèr Booking</a>'
-			}
+			confirmBooking($id, $token);
+			orderInfo($id);
+			echo '<br><a href="http://www.htodap.com/itw/php/cancelBooking.php?id ' . $id . '&token=' . $token . ' &cancel=1"' . 'style="margin-left: 20px; text-decoration: none; padding: 8px; background-color: #E02F1C; color: white;\">Kansellèr Booking</a>'
 		}
 		else
 		{
@@ -112,7 +105,6 @@ function confirmBooking($id, $token)
 		));
 
 		echo '<p>Reservasjonen din er bekreftet</p><br>';
-		orderInfo($id);
 	}
 }
 
