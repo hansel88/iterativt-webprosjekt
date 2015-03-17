@@ -7,7 +7,7 @@ require 'header.php';
 		<section id="wrapper">
 			<h1>Velg tidspunkt</h1>
 <?php
-$from = $_POST['fromDate'];
+$from = $_POST['date'];
 $to = $from;//++ legge til så det blir på slutten av dagen
 $hours = $_POST['hours'];
 $size = $_POST['size'];
