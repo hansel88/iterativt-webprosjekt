@@ -1,4 +1,4 @@
-
+/*
 
 $(document).ready(function(){
     $('#fromDate').datetimepicker({
@@ -7,7 +7,7 @@ $(document).ready(function(){
 });
 
  datetimepicker("option", "showTimepicker", false);
-
+*/
 
 
 /*

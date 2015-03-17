@@ -11,6 +11,9 @@ $from = $_POST['date'];
 $to = $from;//++ legge til så det blir på slutten av dagen
 $hours = $_POST['hours'];
 $size = $_POST['size'];
+
+echo 'hours: ' .  $hours;
+echo 'size: ' .  $size;
 //$email = $_POST['email'];
 
 /*
@@ -26,32 +29,40 @@ $_SESSION['toDate'] = $to; //fromDate + hours
 if(isset($_POST['projector']) && $_POST['projector'] == 'yes')
 {
 	$rooms = $database->prepare("SELECT * FROM room WHERE size >= :size AND projector = 1 ORDER BY size, room_nr");
-} else {
+} 
+else 
+{
 	$rooms = $database->prepare("SELECT * FROM room WHERE size >= :size ORDER BY size, room_nr");
 }
+
 $rooms->setFetchMode(PDO::FETCH_OBJ);
 $rooms->execute(array(
 	'size' => $size
 ));
+
 $possibleRooms = $rooms->fetch();
 
+
 $possibleRoomIds = array();
-while ($possibleRooms = $rooms->fetch())
+while ($room = $rooms->fetch())
 {
-	array_push($possibleRoomIds, $possibleRooms->room_nr);
+	array_push($possibleRoomIds, $room->room_nr);
 }
 
-echo array_values($possibleRoomIds);
-$reservations = $database->prepare("SELECT * FROM room_reservation WHERE fromDate BETWEEN :from AND :to AND room_nr IN($possibleRoomIds) ORDER BY size, room_nr");
+echo implode(", " ,$possibleRoomIds);
+
+$reservations = $database->prepare("SELECT * FROM room_reservation WHERE fromDate BETWEEN :fromDate AND :toDate AND room_nr IN (:possibleRoomIds) ORDER BY size, room_nr");
 $reservations->setFetchMode(PDO::FETCH_OBJ);
 $reservations->execute(array(
-	'from' => $from,
-	'to' => $to
+	'fromDate' => $from,
+	'toDate' => $to,
+	'possibleRoomIds' => implode(", " ,$possibleRoomIds)
 ));
-$reservations = $reservations->fetch();
+$reservationsOnChosenDay = $reservations->fetch();
 
-print_r($possibleRooms);
-print_r($reservations);
+
+print_r($reservationsOnChosenDay);
+
 
 
 /*
@@ -72,6 +83,7 @@ $sql->execute(array(
 $possibleRooms = $sql->fetch();
 */
 
+
 if (!$possibleRooms)
 {
 	echo '<p>Det er desverre ingen ledige rom i dette tidsrommet</p>';
@@ -84,11 +96,13 @@ else
 		$proj = 'Nei';
 		if ($possibleRooms->projector == 1) $proj = 'Ja';
 		echo '<tr><td><input type="radio" name="room" value="' . $possibleRooms->room_nr . '" required></td><td>' . $possibleRooms->room_nr . '</td><td>' . substr($from, 0, 10) . '</td><td>' . substr($from, -5) . '</td><td>' . substr($to, -5) . '</td><td>' . $proj . '</td></tr>';
-	} while ($possibleRooms = $sql->fetch());
+	} while ($possibleRooms = $rooms->fetch());
 	echo '</table><button id="chooseRoomSubmit" type="submit" class="pure-button pure-button-primary">Velg rom</button></form>';
 }
+
 ?>
-</section>
+
+</section> 
 
 
 <?php require 'footer.php'; ?>

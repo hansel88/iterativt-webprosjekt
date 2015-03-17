@@ -31,7 +31,7 @@
 
 					<div class="pure-control-group">
 						<label for="size">Antall personer: </label>
-						<select id="size">
+						<select id="size" name="size">
 						  <option value="2">2</option>
 						  <option value="3">3</option>
 						  <option value="4">4</option>
