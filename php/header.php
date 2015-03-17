@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+        <title>Rom Reservering</title>
 		<meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
@@ -14,3 +15,6 @@
 				<img id="logobilde" src="../img/logo.jpg" alt="logo">
 			</a>
 		</div>
+
+
+
