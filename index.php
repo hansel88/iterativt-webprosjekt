@@ -4,7 +4,7 @@
 		<section id="wrapper">
 			<h1>Rom-booking</h1>
 
-			<div id="form">
+			<!--<div id="form">-->
 						<!--
 						Dato: <input type="date" name="dato" required>
 						<br>
@@ -15,7 +15,7 @@
 
 					<div class="pure-control-group">
 						<label for="date">Dato:</label>
-						<input type="date" name="date" value="" size="25" required>
+						<input type="date" name="date" value="<?php echo date('Y-m-d'); ?>" min="<?php echo date('Y-m-d'); ?>" max="<?php echo date('Y-m-d', strtotime('+30 days')); ?>"required>
 					</div>
 
 					<div class="pure-control-group">
@@ -47,7 +47,7 @@
 					</div>
 					
 				</form>
-			</div>
+			<!--</div>-->
 		</section>
 	<script src="js/jquery.js">
 	</script>
