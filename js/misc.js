@@ -1,4 +1,15 @@
 
+
+$(document).ready(function(){
+    $('#fromDate').datetimepicker({
+        'showTimepicker': false
+    });     
+});
+
+ datetimepicker("option", "showTimepicker", false);
+
+
+
 /*
  $('#searchForm').on('submit', function(e) {
     e.preventDefault();

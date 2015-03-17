@@ -8,10 +8,10 @@ require 'header.php';
 			<h1>Velg tidspunkt</h1>
 <?php
 $from = $_POST['fromDate'];
-$to = $_POST['toDate'];
-//$hours = $_POST['hours'];
+$to = $from;//++ legge til så det blir på slutten av dagen
+$hours = $_POST['hours'];
 $size = $_POST['size'];
-$email = $_POST['email'];
+//$email = $_POST['email'];
 
 /*
 echo '<p> ballefrans</p>';
@@ -21,24 +21,38 @@ echo $faen;
 
 $_SESSION['fromDate'] = $from;
 $_SESSION['toDate'] = $to; //fromDate + hours
-$_SESSION['email'] = $email;
+//$_SESSION['email'] = $email;
 
 if(isset($_POST['projector']) && $_POST['projector'] == 'yes')
 {
-	$sql = $database->prepare("SELECT * FROM room WHERE size >= :size AND projector = 1 ORDER BY size, room_nr");
+	$rooms = $database->prepare("SELECT * FROM room WHERE size >= :size AND projector = 1 ORDER BY size, room_nr");
 } else {
-	$sql = $database->prepare("SELECT * FROM room WHERE size >= :size");
+	$rooms = $database->prepare("SELECT * FROM room WHERE size >= :size ORDER BY size, room_nr");
 }
-$sql->setFetchMode(PDO::FETCH_OBJ);
-$sql->execute(array(
-	'size' => $size,
-	'from' => $from
+$rooms->setFetchMode(PDO::FETCH_OBJ);
+$rooms->execute(array(
+	'size' => $size
 ));
-$possibleRooms = $sql->fetch();
+$possibleRooms = $rooms->fetch();
+
+$possibleRoomIds = array();
+while ($possibleRooms = $rooms->fetch())
+{
+	array_push($possibleRoomIds, $possibleRooms->room_nr);
+}
+
+echo array_values($possibleRoomIds);
+$reservations = $database->prepare("SELECT * FROM room_reservation WHERE fromDate BETWEEN :from AND :to AND room_nr IN($possibleRoomIds) ORDER BY size, room_nr");
+$reservations->setFetchMode(PDO::FETCH_OBJ);
+$reservations->execute(array(
+	'from' => $from,
+	'to' => $to
+));
+$reservations = $reservations->fetch();
 
 print_r($possibleRooms);
+print_r($reservations);
 
-$sql = $database->prepare("SELECT * FROM room_reservation WHERE size >= :size AND projector = 1 ORDER BY size, room_nr");
 
 /*
 if(isset($_POST['projector']) && $_POST['projector'] == 'yes')
