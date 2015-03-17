@@ -19,11 +19,6 @@
 					</div>
 
 					<div class="pure-control-group">
-						<label for="fromTime">Fra kl.:</label>
-						<input type="time" name="fromTime" value="" size="25" required>
-					</div>
-
-					<div class="pure-control-group">
 						<label for="hours">Antall timer: </label>
 						<select id="hours" name="hours">
 						  <option value="1">1</option>
