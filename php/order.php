@@ -29,7 +29,7 @@ else
 			else
 			{
 				confirmBooking($id, $token);
-				echo '<a href="http://www.htodap.com/itw/php/cancelBooking.php?id ' . $id . '&token=' . $token . ' &cancel=1"' . 'style="margin-left: 20px; text-decoration: none; padding: 8px; background-color: #E02F1C; color: white;\">Kansellèr Booking</a>'
+				echo '<br><a href="http://www.htodap.com/itw/php/cancelBooking.php?id ' . $id . '&token=' . $token . ' &cancel=1"' . 'style="margin-left: 20px; text-decoration: none; padding: 8px; background-color: #E02F1C; color: white;\">Kansellèr Booking</a>'
 			}
 		}
 		else
@@ -60,6 +60,7 @@ function sendMail($to, $room, $fromDate, $toDate)
         'token' => $token
     ));
     $sql = $database->prepare("SELECT id FROM room_reservation WHERE room_nr = :room_nr AND user_email = :user_email AND fromDate = :fromDate AND toDate = :toDate AND token = :token");
+	$sql->setFetchMode(PDO::FETCH_OBJ);
     $sql->execute(array(
         'room_nr' => $room,
         'user_email' => $to,
@@ -67,6 +68,8 @@ function sendMail($to, $room, $fromDate, $toDate)
         'toDate' => $toDate,
         'token' => $token
     ));
+
+    $id = $sql->fetch()->id;
 
     $subject = "Vennligst bekreft romreservasjon";
 
@@ -108,7 +111,7 @@ function confirmBooking($id, $token)
 			'token' => $token
 		));
 
-		echo '<p>Reservasjonen din er bekreftet</p>';
+		echo '<p>Reservasjonen din er bekreftet</p><br>';
 		orderInfo($id);
 	}
 }
@@ -141,7 +144,7 @@ function orderInfo($id)
 			'id' => $id
 		));
 		$booking = $sql->fetch();
-		echo "Rom " . $booking->room_nr . " er reservert for " . $booking->size . " personer i " . $booking->time . " timer fra " . $booking->fromDate . "."
+		echo "<p>Rom " . $booking->room_nr . " er reservert for " . $booking->size . " personer i " . $booking->time . " timer fra " . $booking->fromDate . ".</p>"
 	}
 }
 
@@ -155,6 +158,14 @@ function bookingExists($id)
 
 	if (!$sql->fetch()) return false;
 	else return true;
+}
+
+function redirect()
+{
+	header("Location: ../index.php")
+	session_unset();
+	session_destroy();
+	exit();
 }
 
 require 'footer.php';
