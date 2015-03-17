@@ -22,6 +22,11 @@ echo '<p> ballefrans</p>';
 $faen = 'start:' . $from . ' end: ' . $to;
 echo $faen;
 */
+class availableTime
+{
+	public $available;
+    public $time = "";
+}
 
 $_SESSION['fromDate'] = $from;
 $_SESSION['toDate'] = $to; //fromDate + hours
@@ -40,8 +45,6 @@ $rooms->setFetchMode(PDO::FETCH_OBJ);
 $rooms->execute(array(
 	'size' => $size
 ));
-
-
 
 $possibleRooms = array();
 $possibleRoomIds = array();
@@ -67,10 +70,16 @@ while ($reservation = $reservations->fetch())
 	array_push($reservationsOnChosenDay, $reservation);
 }
 
+$availableTimes = array();
+for ($x = 0; $x <= 12; $x++) {
+    $obj = new availableTime();
+	$obj->time = '' . ($x+8);
+	$obj->available = false;
+	array_push($availableTimes, $obj);
+} 
 
+//TODO here: loope igjennom alle rom/reservasjoner. Alle steder der det er <hours> timer ledig i strekk, gjøre available til true i tilsvarende tidspunkter i availableTimes-arrayet.
 
-
-//print_r($reservationsOnChosenDay);
 
 
 
