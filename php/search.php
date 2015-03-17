@@ -7,6 +7,7 @@ require 'header.php';
 		<section id="wrapper">
 			<h1>Velg tidspunkt</h1>
 <?php
+
 $from = $_POST['date'];
 $to = $from;//++ legge til så det blir på slutten av dagen
 $hours = $_POST['hours'];
@@ -40,12 +41,13 @@ $rooms->execute(array(
 	'size' => $size
 ));
 
-$possibleRooms = $rooms->fetch();
 
 
+$possibleRooms = array();
 $possibleRoomIds = array();
 while ($room = $rooms->fetch())
 {
+	array_push($possibleRooms, $room);
 	array_push($possibleRoomIds, $room->room_nr);
 }
 
@@ -58,10 +60,17 @@ $reservations->execute(array(
 	'toDate' => $to,
 	'possibleRoomIds' => implode(", " ,$possibleRoomIds)
 ));
-$reservationsOnChosenDay = $reservations->fetch();
+
+$reservationsOnChosenDay = array();
+while ($reservation = $reservations->fetch())
+{
+	array_push($reservationsOnChosenDay, $reservation);
+}
 
 
-print_r($reservationsOnChosenDay);
+
+
+//print_r($reservationsOnChosenDay);
 
 
 
@@ -83,7 +92,7 @@ $sql->execute(array(
 $possibleRooms = $sql->fetch();
 */
 
-
+/*
 if (!$possibleRooms)
 {
 	echo '<p>Det er desverre ingen ledige rom i dette tidsrommet</p>';
@@ -99,6 +108,7 @@ else
 	} while ($possibleRooms = $rooms->fetch());
 	echo '</table><button id="chooseRoomSubmit" type="submit" class="pure-button pure-button-primary">Velg rom</button></form>';
 }
+*/
 
 ?>
 
