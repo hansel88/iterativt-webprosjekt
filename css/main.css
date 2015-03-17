@@ -65,6 +65,7 @@ th, td
 	padding: 2px 5px;
 }
 
+/*
 .pure-control-group {
     position: absolute;
     height: 64px;
@@ -99,7 +100,7 @@ th, td
     top: 260px;
     left: 180px;
 }
-
+*/
 #chooseRoomSubmit
 {
 	position: relative;
