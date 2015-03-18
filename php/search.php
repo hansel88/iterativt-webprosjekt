@@ -23,7 +23,6 @@ echo '<p> ballefrans</p>';
 $faen = 'start:' . $from . ' end: ' . $to;
 echo $faen;
 */
-
 class availableTime
 {
 	public $available;
@@ -145,15 +144,16 @@ foreach($availableTimes as $time )
 {
 	if($time->available)
 	{
-		echo '<li><a href="#" class="greenTime">' $time->time '</a></li>';
+		echo '<li><input type="button" onclick="testMethod(' . $time->time . ')" class="greenTime" value="' . $time->time . '"/></li>';
 	}
 	else
 	{
-		echo '<li><a href="#" class="redTime">' $time->time '</a></li>';
+		echo '<li><input type="button" onclick="showError()" class="redTime" value="' . $time->time . '"/></li>';
 	}
 }
 
 echo '</ul></div>';
+
 
 
 
@@ -196,8 +196,18 @@ else
 */
 
 ?>
-
 </section> 
 
+<script>
+	testMethod = function(k)
+	{
+		alert(k);
+	}
+
+	showError = function()
+	{
+		alert('Ikke et gyldig tidspunkt');
+	}
+</script>
 
 <?php require 'footer.php'; ?>

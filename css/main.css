@@ -112,9 +112,31 @@ th, td
 {
     display: inline;
     list-style-type: none;
-    padding-right: 20px;
+    padding: 0.1em;
 }
 
+#timeList li input
+{
+    padding: 0.3em;
+    border: none;
+}
+
+#timeList li input:hover
+{
+    border-bottom: 2px solid black;
+    color: white;
+    text-decoration: none;
+}
+
+.redTime{
+    background-color: red;
+    color: white;
+}
+
+.greenTime{
+    background-color: green;
+    color: white;
+}
 
 
 
