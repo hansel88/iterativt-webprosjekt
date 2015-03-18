@@ -86,7 +86,7 @@ $availableTimes = array();
 for ($x = 0; $x <= 12; $x++) {
     $obj = new availableTime();
 	$obj->time = '' . ($x+8);
-	$obj->available = true;
+	$obj->available = false;
 	array_push($availableTimes, $obj);
 } 
 
@@ -96,7 +96,13 @@ foreach ($possibleRooms as &$room) {
 	echo 'room..';
     $hasReservations = false;
 
-    $availableTimesForRoom = $availableTimes;
+    $availableTimesForRoom = array();
+    for ($x = 0; $x <= 12; $x++) {
+	    $obj = new availableTime();
+		$obj->time = '' . ($x+8);
+		$obj->available = true;
+		array_push($availableTimesForRoom, $obj);
+	} 
 
     foreach ($reservationsOnChosenDay as &$reservation) {
     	echo 'reservation...';
@@ -106,8 +112,20 @@ foreach ($possibleRooms as &$room) {
 			//$from = date_create($reservation->fromDate);
 			$from = date("H", strtotime($reservation->fromDate));
 			$to = date("H", strtotime($reservation->toDate));
+			for ($x =  intval($from); $x <= intval($to); $x++) {
+				$availableTimesForRoom[$x-8]->available = false;
+			} 
     	}
     
+	}
+
+	if(!$hasReservations)
+	{
+		break; //Jumps out of loop as this room has available time all day
+	}
+	else
+	{
+
 	}
 }
 
