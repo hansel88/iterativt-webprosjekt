@@ -22,6 +22,7 @@ echo '<p> ballefrans</p>';
 $faen = 'start:' . $from . ' end: ' . $to;
 echo $faen;
 */
+
 class availableTime
 {
 	public $available;
@@ -54,14 +55,14 @@ while ($room = $rooms->fetch())
 	array_push($possibleRoomIds, $room->room_nr);
 }
 
-echo implode(", " ,$possibleRoomIds);
+echo '!!! ' . join(', ', array_filter($possibleRoomIds));
 
-$reservations = $database->prepare("SELECT * FROM room_reservation WHERE fromDate BETWEEN :fromDate AND :toDate AND room_nr IN (:possibleRoomIds) ORDER BY size, room_nr");
+$reservations = $database->prepare("SELECT * FROM room_reservation WHERE confirmed = 1 AND fromDate BETWEEN :fromDate AND :toDate AND room_nr IN (:possibleRoomIds) ORDER BY size, room_nr");
 $reservations->setFetchMode(PDO::FETCH_OBJ);
 $reservations->execute(array(
 	'fromDate' => $from,
 	'toDate' => $to,
-	'possibleRoomIds' => implode(", " ,$possibleRoomIds)
+	'possibleRoomIds' => join(',', array_filter($possibleRoomIds))//implode(", " ,$possibleRoomIds)
 ));
 
 $reservationsOnChosenDay = array();
@@ -74,9 +75,30 @@ $availableTimes = array();
 for ($x = 0; $x <= 12; $x++) {
     $obj = new availableTime();
 	$obj->time = '' . ($x+8);
-	$obj->available = false;
+	$obj->available = true;
 	array_push($availableTimes, $obj);
 } 
+
+
+
+foreach ($possibleRooms as &$room) {
+	echo 'room..';
+    $hasReservations = false;
+
+    $availableTimesForRoom = $availableTimes;
+
+    foreach ($reservationsOnChosenDay as &$reservation) {
+    	echo 'reservation...';
+    	if($reservation->room_nr == $room->room_nr)
+    	{
+    		$hasReservations = true;
+			$from = $reservation->fromDate;
+			$to = $reservation->toDate;
+			echo 'from: ' . $from;
+    	}
+    
+	}
+}
 
 //TODO here: loope igjennom alle rom/reservasjoner. Alle steder der det er <hours> timer ledig i strekk, gjøre available til true i tilsvarende tidspunkter i availableTimes-arrayet.
 
