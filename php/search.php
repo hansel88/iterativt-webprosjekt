@@ -126,7 +126,7 @@ foreach ($possibleRooms as &$room) {
 
 	if(!$hasReservations)
 	{
-		break; //Jumps out of loop as this room has available time all day
+		break; //Jumps out of loop as this room has available time all day (and thats all we need, eh? ;)
 	}
 	else
 	{
@@ -138,6 +138,22 @@ foreach ($possibleRooms as &$room) {
 		} 
 	}
 }
+
+echo '<div id="timeListContainer"><ul id="timeList">';
+
+foreach($availableTimes as $time )
+{
+	if($time->available)
+	{
+		echo '<li><a href="#" class="greenTime">' $time->time '</a></li>';
+	}
+	else
+	{
+		echo '<li><a href="#" class="redTime">' $time->time '</a></li>';
+	}
+}
+
+echo '</ul></div>';
 
 
 
