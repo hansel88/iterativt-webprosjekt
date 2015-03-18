@@ -15,6 +15,7 @@ $size = $_POST['size'];
 
 echo 'hours: ' .  $hours;
 echo 'size: ' .  $size;
+echo $from ;
 //$email = $_POST['email'];
 
 /*
@@ -57,19 +58,29 @@ while ($room = $rooms->fetch())
 
 echo '!!! ' . join(', ', array_filter($possibleRoomIds));
 
-$reservations = $database->prepare("SELECT * FROM room_reservation WHERE confirmed = 1 AND fromDate BETWEEN :fromDate AND :toDate AND room_nr IN (:possibleRoomIds) ORDER BY size, room_nr");
+
+
+$reservations = $database->prepare("SELECT * FROM room_reservation WHERE confirmed = 1 AND fromDate BETWEEN :fromDate AND :toDate AND room_nr IN (:possibleRoomIds) ORDER BY room_nr");
 $reservations->setFetchMode(PDO::FETCH_OBJ);
 $reservations->execute(array(
 	'fromDate' => $from,
 	'toDate' => $to,
 	'possibleRoomIds' => join(',', array_filter($possibleRoomIds))//implode(", " ,$possibleRoomIds)
 ));
-
+/*
+$reservations = $database->prepare("SELECT * FROM room_reservation WHERE room_nr IN (:possibleRoomIds) ORDER BY room_nr");
+$reservations->setFetchMode(PDO::FETCH_OBJ);
+$reservations->execute(array(
+	'possibleRoomIds' => join(',', array_filter($possibleRoomIds))//implode(", " ,$possibleRoomIds)
+));
+*/
 $reservationsOnChosenDay = array();
 while ($reservation = $reservations->fetch())
 {
 	array_push($reservationsOnChosenDay, $reservation);
 }
+
+print_r($reservationsOnChosenDay);
 
 $availableTimes = array();
 for ($x = 0; $x <= 12; $x++) {
@@ -80,7 +91,7 @@ for ($x = 0; $x <= 12; $x++) {
 } 
 
 
-
+//TODO here: loope igjennom alle rom/reservasjoner. Alle steder der det er <hours> timer ledig i strekk, gjøre available til true i tilsvarende tidspunkter i availableTimes-arrayet.
 foreach ($possibleRooms as &$room) {
 	echo 'room..';
     $hasReservations = false;
@@ -92,15 +103,14 @@ foreach ($possibleRooms as &$room) {
     	if($reservation->room_nr == $room->room_nr)
     	{
     		$hasReservations = true;
-			$from = $reservation->fromDate;
-			$to = $reservation->toDate;
-			echo 'from: ' . $from;
+			//$from = date_create($reservation->fromDate);
+			$from = date("H", strtotime($reservation->fromDate));
+			$to = date("H", strtotime($reservation->toDate));
     	}
     
 	}
 }
 
-//TODO here: loope igjennom alle rom/reservasjoner. Alle steder der det er <hours> timer ledig i strekk, gjøre available til true i tilsvarende tidspunkter i availableTimes-arrayet.
 
 
 
