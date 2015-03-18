@@ -82,6 +82,7 @@ while ($reservation = $reservations->fetch())
 
 print_r($reservationsOnChosenDay);
 
+//Used to get the full picture of available times 
 $availableTimes = array();
 for ($x = 0; $x <= 12; $x++) {
     $obj = new availableTime();
@@ -90,19 +91,22 @@ for ($x = 0; $x <= 12; $x++) {
 	array_push($availableTimes, $obj);
 } 
 
+//Used for each room when checking against reservations
+$availableTimesForRoom = array();
+for ($x = 0; $x <= 12; $x++) {
+    $obj = new availableTime();
+	$obj->time = '' . ($x+8);
+	$obj->available = true;
+	array_push($availableTimesForRoom, $obj);
+} 
+
 
 //TODO here: loope igjennom alle rom/reservasjoner. Alle steder der det er <hours> timer ledig i strekk, gjøre available til true i tilsvarende tidspunkter i availableTimes-arrayet.
 foreach ($possibleRooms as &$room) {
 	echo 'room..';
     $hasReservations = false;
 
-    $availableTimesForRoom = array();
-    for ($x = 0; $x <= 12; $x++) {
-	    $obj = new availableTime();
-		$obj->time = '' . ($x+8);
-		$obj->available = true;
-		array_push($availableTimesForRoom, $obj);
-	} 
+    $_availableTimesForRoom = $availableTimesForRoom; //copy
 
     foreach ($reservationsOnChosenDay as &$reservation) {
     	echo 'reservation...';
@@ -112,9 +116,10 @@ foreach ($possibleRooms as &$room) {
 			//$from = date_create($reservation->fromDate);
 			$from = date("H", strtotime($reservation->fromDate));
 			$to = date("H", strtotime($reservation->toDate));
+
 			for ($x =  intval($from); $x <= intval($to); $x++) {
-				$availableTimesForRoom[$x-8]->available = false;
-			} 
+				$_availableTimesForRoom[$x-8]->available = false;
+			}
     	}
     
 	}
@@ -125,7 +130,12 @@ foreach ($possibleRooms as &$room) {
 	}
 	else
 	{
-
+		for ($x = 0; $x <= 12; $x++) {
+			if($_availableTimesForRoom[$x] == true)
+			{
+				$availableTimes[$x]->available = true;
+			}
+		} 
 	}
 }
 
