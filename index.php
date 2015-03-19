@@ -3,14 +3,6 @@
  ?>
 		<section id="wrapper">
 			<h1>Rom-booking</h1>
-
-			<!--<div id="form">-->
-						<!--
-						Dato: <input type="date" name="dato" required>
-						<br>
-						Fra <input type="time" name="ftid" required>
-						til <input type="time" name="ttid" required> 
-						-->
 				<form class="pure-form pure-form-aligned" id="searchForm" name="searchForm" action="php/search.php" method="post">
 
 					<div class="pure-control-group">
@@ -47,7 +39,7 @@
 					</div>
 					
 				</form>
-			<!--</div>-->
+
 		</section>
 	<script src="js/jquery.js">
 	</script>

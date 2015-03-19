@@ -67,42 +67,6 @@ th, td
 	padding: 2px 5px;
 }
 
-/*
-.pure-control-group {
-    position: absolute;
-    height: 64px;
-    top: 100px;
-    left: 80px;
-}
-
-.pure-control-group1 {
-    position: absolute;
-    height: 72px;
-    width: 281px;
-    top: 20px;
-    left: 80px;
-}
-
-.pure-control-group2 {
-    position: absolute;
-    height: 72px;
-    width: 300px;
-    top: 160px;
-    left: 120px;
-}
-.pure-checkbox {
-    position: absolute;
-    height: 36px;
-    width: 500px;
-    top: 220px;
-    left: 150px;
-}
-.pure-button-primary {
-    position: absolute;
-    top: 260px;
-    left: 180px;
-}
-*/
 #chooseRoomSubmit
 {
 	position: relative;
