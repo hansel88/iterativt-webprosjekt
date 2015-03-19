@@ -15,9 +15,7 @@ else {
     $fromTime = $_POST['fromTime'];
     $toTime = $_POST['toTime'];
 
-    $sql = $database->prepare(
-    "INSERT INTO room_reservation (room_nr, user_email, date, fromTime, toTime, token) VALUES (:room_nr, :user_email, :date, :fromTime, :toTime, :token);"
-    );
+    $sql = $database->prepare("INSERT INTO room_reservation (room_nr, user_email, date, fromTime, toTime, token) VALUES (:room_nr, :user_email, :date, :fromTime, :toTime, :token)");
     $sql->execute(array(
         'room_nr' => $room,
         'user_email' => $to,
@@ -27,7 +25,7 @@ else {
         'token' => $token
     ));
 
-    $sql = $database->prepare("SELECT id FROM room_reservation WHERE room_nr = :room_nr AND user_email = :user_email AND date = :date AND fromTime = :fromTime AND toTime = :toTime AND token = :token");
+    $sql = $database->prepare("SELECT * FROM room_reservation WHERE room_nr = :room_nr AND user_email = :user_email AND date = :date AND fromTime = :fromTime AND toTime = :toTime AND token = :token");
     $sql->setFetchMode(PDO::FETCH_OBJ);
     $sql->execute(array(
         'room_nr' => $room,
@@ -39,7 +37,7 @@ else {
     ));
 
     $id = $sql->fetch()->id;
-
+    var_dump($id);
     $subject = "Vennligst bekreft romreservasjon";
 
     $message = '<html><body>';

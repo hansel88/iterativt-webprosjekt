@@ -110,8 +110,8 @@ foreach ($possibleRooms as &$room) {
     	{
     		$hasReservations = true;
 
-			$fromHour = date("H", strtotime($reservation->fromDate));
-			$toHour = date("H", strtotime($reservation->toDate));
+			$fromHour = $reservation->fromTime;
+			$toHour = $reservation->toTime;
 
 			for ($x = intval($fromHour); $x <= intval($toHour); $x++) { 
 				$_availableTimesForRoom[$x-8]->available = false;
