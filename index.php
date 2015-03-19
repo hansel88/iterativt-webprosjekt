@@ -35,7 +35,7 @@
 							<input type="checkbox" name="projector" value="yes"> Rom med projektor
 						</label>
 
-						<button type="submit" class="pure-button pure-button-primary">Søk rom</button>
+						<button type="submit" id="searchBtn" class="pure-button pure-button-primary">Søk rom</button>
 					</div>
 					
 				</form>

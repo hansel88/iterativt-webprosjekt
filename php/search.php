@@ -5,7 +5,7 @@ require 'header.php';
 
 ?>
 		<section id="wrapper">
-			<h2>Velg tidspunkt</h2>
+			<h3>Velg tidspunkt</h3>
 <?php
 
 $from = $_POST['date'];
@@ -174,8 +174,7 @@ echo '<form method="post" action="sendConfirmationMail.php" class="pure-form pur
 echo '<input type="text" style="display: none;" id="fromTime" name="fromTime" /> <input style="display: none;"  type="text" id="toTime" name="toTime" /> <input style="display: none;"  type="text" id="room" name="room" /> <input style="display: none;"  type="date" name="date" value="' . $from . '"/>';
 echo '<button id="chooseRoomSubmit" type="submit" class="pure-button pure-button-primary">Book</button></form>';
 
-echo '<button class="pure-button pure-button-primary" onclick="goBack()">Tilbake</button>';
-
+echo '<button class="actionBtn pure-button pure-button-primary" id="backButton" onclick="goBack()">Tilbake</button>';
 ?>
 </section> 
 

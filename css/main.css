@@ -26,7 +26,7 @@ p
 	height: 400px;
     overflow: hidden;
 	border: 3px solid black;
-	padding: 5px;
+	/*padding: 5px;*/
     width: 400px;
 }
 
@@ -79,6 +79,10 @@ th, td
 	left: 150px;
 }
 
+#timeList{
+    text-align: center;
+}
+
 #timeList li
 {
     display: inline;
@@ -91,6 +95,11 @@ th, td
     padding: 0.3em;
     border: none;
     width: 23px;
+}
+
+.pure-control-group
+{
+    text-align: center;
 }
 
 #timeList li input:hover
@@ -108,13 +117,37 @@ th, td
 .greenTime{
     background-color: green;
     color: white;
+}
 
+h3{
+    text-align: center;
 }
 
 #infoText {
     padding: 1em;
     font-size: 1.2em;
     text-align: center;
+}
+
+#searchBtn
+{
+    height: 40px;
+    width: 100%;
+    left: 0px;
+    position: absolute;
+}
+
+#chooseRoomSubmit{
+    height: 40px;
+    width: 100%;
+    left: 0px;
+}
+
+#backButton {
+    margin-top: 30px;
+    height: 40px;
+    width: 100%;
+    left: 0px;
 }
     
 
