@@ -105,11 +105,6 @@ th, td
     width: 23px;
 }
 
-.pure-control-group
-{
-    text-align: center;
-}
-
 #timeList li input:hover
 {
     opacity: 0.5;
