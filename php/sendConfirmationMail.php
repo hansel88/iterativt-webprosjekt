@@ -36,7 +36,9 @@ else {
         'token' => $token
     ));
 
-    $id = $sql->fetch()->id;
+    $res = $sql->fetch();
+    $id = $res->id;
+
     $subject = "Vennligst bekreft romreservasjon";
 
     $message = '<html><body>';
@@ -52,7 +54,7 @@ else {
     $headers .= "From:" . $from;
     if(mail($to,$subject,$message,$headers)) {
         http_response_code(200);  // mail ble sendt, all is well
-        redirect();
+        redirect($id);
     }
     else
     {
@@ -60,9 +62,9 @@ else {
     }
 }
 
-function redirect()
+function redirect($_id)
 {
-    header("Location: order.php?id=" . $id);
+    header("Location: order.php?id=" . $_id);
     exit;
 }
 ?>
