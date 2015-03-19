@@ -52,12 +52,12 @@ else {
     $headers .= "From:" . $from;
     if(mail($to,$subject,$message,$headers)) {
         http_response_code(200);  // mail ble sendt, all is well
-        header("order.php?id=" . $id);
-        exit;
     }
     else
     {
         http_response_code(500); // klarte ikke å sende mail
     }
+    header("order.php?id=" . $id);
+    exit;
 }
 ?>
