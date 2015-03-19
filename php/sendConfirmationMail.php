@@ -28,14 +28,25 @@ else {
         'token' => $token
     ));
 
+    $sql = $database->prepare("SELECT id FROM room_reservation WHERE room_nr = :room_nr AND user_email = :user_email AND fromDate = :fromDate AND toDate = :toDate AND token = :token");
+    $sql->setFetchMode(PDO::FETCH_OBJ);
+    $sql->execute(array(
+        'room_nr' => $room,
+        'user_email' => $to,
+        'fromDate' => $fromDate,
+        'toDate' => $toDate,
+        'token' => $token
+    ));
+
+    $id = $sql->fetch()->id;
+
     $subject = "Vennligst bekreft romreservasjon";
 
     $message = '<html><body>';
     $message .= '<h3>Hei, ' .$to . '</h3>';
-    $message .= '<p>Rom ' .  $room . " " . "er holdt av for reservasjon av deg fra " . $fromDate . " til " . $toDate . ". Bekreft romreservasjon ved å trykke på knappen under.<p>";
-    $message .= '<a href="http://www.htodap.com/itw/php/confirmBooking.php?token=' . $token . '"' . 'style=\"margin-left: 20px; text-decoration: none; padding: 8px; background-color: #5A9E23; color: white;\">Bekreft Booking</a>';
-    $message .= '<p>For kansellering av rom, åpne denne linken: ';
-    $message .= '<a href="http://www.htodap.com/itw/php/cancelBooking.php?token=' . $token . '"' . 'style=\"margin-left: 20px; text-decoration: none; padding: 8px; background-color: #E02F1C; color: white;\">Kansellèr Booking</a>';
+    $message .= '<p>Rom ' .  $room . " " . "er holdt av for reservasjon av deg fra " . $fromDate . " til " . $toDate . ". Bekreft romreservasjon ved å trykke på knappen under. Her kan du også se på orderen din og evt. kansellere den.<p>";
+    $message .= '<a href="http://www.htodap.com/itw/php/confirmBooking.php?id' . $id . '&token=' . $token . '"' . 'style=\"margin-left: 20px; text-decoration: none; padding: 8px; background-color: #5A9E23; color: white;\">Bekreft Booking</a>';
+    echo '<a href="http://www.htodap.com/itw/php/confirmBooking.php?id' . $id . '&token=' . $token . '"' . 'style=\"margin-left: 20px; text-decoration: none; padding: 8px; background-color: #5A9E23; color: white;\">Bekreft Booking</a>';
     $message .= '<p>Med vennlig hilsen Rom-booking Westerdals</p>';
     $message .= "<p>English: Room" . $room . " " . " is reserved by you from " . $fromDate . " to " . $toDate . ". Confirm reservation by clicking the first link above. Cancel reservation by opening the second one.</p>";
     $message .= '</body></html>';

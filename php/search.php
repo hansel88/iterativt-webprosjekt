@@ -15,7 +15,7 @@ $size = $_POST['size'];
 
 echo 'hours: ' .  $hours;
 echo 'size: ' .  $size;
-echo $from ;
+echo 'date from --> ' . $from ;
 //$email = $_POST['email'];
 
 /*
@@ -56,7 +56,12 @@ while ($room = $rooms->fetch())
 }
 
 echo '!!! ' . join(', ', array_filter($possibleRoomIds));
+<<<<<<< HEAD
 */
+=======
+
+/*
+>>>>>>> origin/master
 $reservations = $database->prepare("SELECT * FROM room_reservation WHERE confirmed = 1 AND fromDate BETWEEN :fromDate AND :toDate AND room_nr IN (:possibleRoomIds) ORDER BY room_nr");
 $reservations->setFetchMode(PDO::FETCH_OBJ);
 $reservations->execute(array(
@@ -64,13 +69,13 @@ $reservations->execute(array(
 	'toDate' => $to,
 	'possibleRoomIds' => join(',', array_filter($possibleRoomIds))//implode(", " ,$possibleRoomIds)
 ));
-/*
+*/
 $reservations = $database->prepare("SELECT * FROM room_reservation WHERE room_nr IN (:possibleRoomIds) ORDER BY room_nr");
 $reservations->setFetchMode(PDO::FETCH_OBJ);
 $reservations->execute(array(
 	'possibleRoomIds' => join(',', array_filter($possibleRoomIds))//implode(", " ,$possibleRoomIds)
 ));
-*/
+
 $reservationsOnChosenDay = array();
 while ($reservation = $reservations->fetch())
 {
@@ -115,11 +120,13 @@ foreach ($possibleRooms as &$room) {
 			$from = date("H", strtotime($reservation->fromDate));
 			$to = date("H", strtotime($reservation->toDate));
 
-			for ($x =  intval($from); $x <= intval($to); $x++) { 
+			for ($x = intval($from); $x <= intval($to); $x++) { 
 				$_availableTimesForRoom[$x-8]->available = false;
+				//echo 'lol ' . $_availableTimesForRoom[$x-8]->available ? 'true' : 'false';
 			}
     	}
 	}
+	//var_dump($_availableTimesForRoom); //LOOKS RIGHT
 
 	if(!$hasReservations)
 	{
@@ -130,15 +137,18 @@ foreach ($possibleRooms as &$room) {
 	}
 	else
 	{
-		$temp = $availableTimes;
+		var_dump($_availableTimesForRoom);
+		//$temp = $availableTimes;
 		$count = 0;
 		for ($x = 0; $x <= 12; $x++) {
-			if($_availableTimesForRoom[$x] == true) //TODO: legg til logikk for å sjekke at det er x antall timer ledige i strekk
+			if($_availableTimesForRoom[$x]->available == true) 
 			{
+				echo 'sjdhfdsjkfhdskjhfsdf';
 				$count++;
-				if(count == $hours)
+				if($count == $hours)
 				{
-					for($z = 0; $z <= $count; $z++)
+					echo'count er hours';
+					for($z = 0; $z < $count; $z++)
 					{
 						$availableTimes[$x - $z]->available = true;
 					}
@@ -150,32 +160,26 @@ foreach ($possibleRooms as &$room) {
 			}
 			else
 			{
+				echo 'count settes til 0 igjen';
 				$count = 0;
 			}
 		} 
-
-		/*
-		for ($x = 0; $x <= 12; $x++) {
-			if($_availableTimesForRoom[$x] == true) //TODO: legg til logikk for å sjekke at det er x antall timer ledige i strekk
-			{
-				$availableTimes[$x]->available = true;
-			}
-		} 
-		*/
 	}
 }
 
+//var_dump($availableTimes); 
+
 echo '<div id="timeListContainer"><ul id="timeList">';
 
-foreach($availableTimes as $time )
+foreach($availableTimes as $_time )
 {
-	if($time->available)
+	if($_time->available)	
 	{
-		echo '<li><input type="button" onclick="testMethod(' . $time->time . ')" class="greenTime" value="' . $time->time . '"/></li>';
+		echo '<li><input type="button" onclick="testMethod(' . $_time->time . ')" class="greenTime" value="' . $_time->time . '"/></li>';
 	}
 	else
 	{
-		echo '<li><input type="button" onclick="showError()" class="redTime" value="' . $time->time . '"/></li>';
+		echo '<li><input type="button" onclick="showError()" class="redTime" value="' . $_time->time . '"/></li>';
 	}
 }
 
@@ -225,16 +229,6 @@ else
 ?>
 </section> 
 
-<script>
-	testMethod = function(k)
-	{
-		alert(k);
-	}
-
-	showError = function()
-	{
-		alert('Ikke et gyldig tidspunkt');
-	}
-</script>
+<script src="../js/search.js"></script>
 
 <?php require 'footer.php'; ?>
