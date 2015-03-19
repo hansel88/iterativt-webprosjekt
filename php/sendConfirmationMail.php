@@ -42,7 +42,7 @@ else {
     $message = '<html><body>';
     $message .= '<h3>Hei, ' .$to . '</h3>';
     $message .= '<p>Rom ' .  $room . " " . "er holdt av for reservasjon av deg den " . $date . " fra " . $fromTime . " til " . $toTime . ". Bekreft romreservasjon ved å trykke på knappen under. Her kan du også se på orderen din og evt. kansellere den.<p>";
-    $message .= '<a href="http://www.htodap.com/itw/php/confirmBooking.php?id=' . $id . '&token=' . $token . '"' . 'style=\"margin-left: 20px; text-decoration: none; padding: 8px; background-color: #5A9E23; color: white;\">Bekreft Booking</a>';
+    $message .= '<a href="http://www.htodap.com/itw/php/order.php?id=' . $id . '&token=' . $token . '"' . 'style=\"margin-left: 20px; text-decoration: none; padding: 8px; background-color: #5A9E23; color: white;\">Bekreft Booking</a>';
     $message .= '<p>Med vennlig hilsen Rom-booking Westerdals</p>';
     $message .= "<p>English: Room" . $room . " " . " is reserved by you on " . $date . " from " . $fromTime . " to " . $toTime . ". Confirm reservation by clicking the link above. From there you can look at your order and cancel it.</p>";
     $message .= '</body></html>';

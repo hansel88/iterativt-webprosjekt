@@ -43,7 +43,6 @@
   }
 
   $('#mailForm').submit(function() {
-    alert('sdkfdfdsa');
      $('#fromTime').val(start);
      $('#toTime').val(end);
      $('#room').val(roomId);
