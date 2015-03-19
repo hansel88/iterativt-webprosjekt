@@ -37,7 +37,6 @@ else {
     ));
 
     $id = $sql->fetch()->id;
-    var_dump($id);
     $subject = "Vennligst bekreft romreservasjon";
 
     $message = '<html><body>';
