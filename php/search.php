@@ -29,8 +29,8 @@ class availableTime
     public $time = "";
 }
 
-$_SESSION['fromDate'] = $from;
-$_SESSION['toDate'] = $to; //fromDate + hours
+//$_SESSION['fromDate'] = $from;
+//$_SESSION['toDate'] = $to; //fromDate + hours
 //$_SESSION['email'] = $email;
 
 if(isset($_POST['projector']) && $_POST['projector'] == 'yes')
@@ -55,8 +55,7 @@ while ($room = $rooms->fetch())
 	array_push($possibleRoomIds, $room->room_nr);
 }
 
-echo '!!! ' . join(', ', array_filter($possibleRoomIds));
-
+//NB HUSK Å BRUKE DENNE KODEN TIL SLUTT
 /*
 $reservations = $database->prepare("SELECT * FROM room_reservation WHERE confirmed = 1 AND fromDate BETWEEN :fromDate AND :toDate AND room_nr IN (:possibleRoomIds) ORDER BY room_nr");
 $reservations->setFetchMode(PDO::FETCH_OBJ);
@@ -78,9 +77,6 @@ while ($reservation = $reservations->fetch())
 	array_push($reservationsOnChosenDay, $reservation);
 }
 
-echo 'reservations on chosen day: ';
-print_r($reservationsOnChosenDay);
-
 //Used to get the full picture of available times 
 $availableTimes = array();
 for ($x = 0; $x <= 12; $x++) {
@@ -88,7 +84,7 @@ for ($x = 0; $x <= 12; $x++) {
 	$obj->time = '' . ($x+8);
 	$obj->available = false;
 	array_push($availableTimes, $obj);
-} 
+}  
 
 //Used for each room when checking against reservations
 $availableTimesForRoom = array();
@@ -100,7 +96,7 @@ for ($x = 0; $x <= 12; $x++) {
 } 
 
 
-//TODO here: loope igjennom alle rom/reservasjoner. Alle steder der det er <hours> timer ledig i strekk, gjøre available til true i tilsvarende tidspunkter i availableTimes-arrayet.
+// loope igjennom alle rom/reservasjoner. Alle steder der det er <hours> timer ledig i strekk, gjøre available til true i tilsvarende tidspunkter i availableTimes-arrayet.
 foreach ($possibleRooms as &$room) {
 	echo 'room..';
     $hasReservations = false;
@@ -112,17 +108,15 @@ foreach ($possibleRooms as &$room) {
     	if($reservation->room_nr == $room->room_nr)
     	{
     		$hasReservations = true;
-			//$from = date_create($reservation->fromDate);
+
 			$from = date("H", strtotime($reservation->fromDate));
 			$to = date("H", strtotime($reservation->toDate));
 
 			for ($x = intval($from); $x <= intval($to); $x++) { 
 				$_availableTimesForRoom[$x-8]->available = false;
-				//echo 'lol ' . $_availableTimesForRoom[$x-8]->available ? 'true' : 'false';
 			}
     	}
 	}
-	//var_dump($_availableTimesForRoom); //LOOKS RIGHT
 
 	if(!$hasReservations)
 	{
@@ -133,8 +127,6 @@ foreach ($possibleRooms as &$room) {
 	}
 	else
 	{
-		//var_dump($_availableTimesForRoom);
-		//$temp = $availableTimes;
 		$count = 0;
 		for ($x = 0; $x <= 12; $x++) {
 			if($_availableTimesForRoom[$x]->available == true) 
@@ -162,23 +154,27 @@ foreach ($possibleRooms as &$room) {
 	}
 }
 
-//var_dump($availableTimes); 
-
 echo '<div id="timeListContainer"><ul id="timeList">';
-
+	
 foreach($availableTimes as $_time )
 {
 	if($_time->available)	
 	{
-		echo '<li><input type="button" onclick="testMethod(' . $_time->time . ')" class="greenTime" value="' . $_time->time . '"/></li>';
+		echo '<li><input id="timeInput' .$_time->time.'" type="button" onclick="testMethod(' . $_time->time . ',' . $hours . ')" class="greenTime" value="' . $_time->time . '"/></li>';
 	}
 	else
 	{
-		echo '<li><input type="button" onclick="showError()" class="redTime" value="' . $_time->time . '"/></li>';
+		echo '<li><input id="timeInput' .$_time->time.'" type="button" onclick="showError()" class="redTime" value="' . $_time->time . '"/></li>';
 	}
 }
 
 echo '</ul></div>';
+
+echo '<p id="infoText"></p> <br />';
+
+echo '<form class="pure-form pure-form-aligned" id="mailForm"><div class="pure-control-group" style=""><label for="email">Epost:</label><input type="email" name="email" size="25" pattern=".+@student.westerdals.no" title="@student.westerdals.no" placeholder="bruker@student.westerdals.no" required></div>';
+						
+echo '<button id="chooseRoomSubmit" onclick="book()" type="submit" class="pure-button pure-button-primary">Book</button></form>';
 
 
 
@@ -224,6 +220,7 @@ else
 ?>
 </section> 
 
-<script src="../js/search.js"></script>
+<script src="../js/jquery.js"></script>
+<script type="text/javascript" src="../js/search.js"></script>
 
 <?php require 'footer.php'; ?>

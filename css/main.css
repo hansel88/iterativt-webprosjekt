@@ -124,7 +124,7 @@ th, td
 
 #timeList li input:hover
 {
-    border-bottom: 2px solid black;
+    opacity: 0.5;
     color: white;
     text-decoration: none;
 }
@@ -137,6 +137,12 @@ th, td
 .greenTime{
     background-color: green;
     color: white;
+}
+
+#infoText {
+    padding: 1em;
+    font-size: 1.2em;
+    text-align: center;
 }
 
 

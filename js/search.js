@@ -1,68 +1,81 @@
 
   var start;
-  var end; 
-  testMethod = function(k)
+  var end;
+
+  testMethod = function(time, hours)
   {
-    if(start === null)
-      start = k;
-    else if(start < k)
+    for(var i = 0; i < hours; i++)
     {
-      end = k;
+      if($('#timeInput' + (time + i)).hasClass('redTime'))
+      {
+         $('#infoText').text('Kan ikke reservere ' + hours + ' timer fra valgt starttidspunkt.');
+         return;
+      }
     }
-    else if(start > k)
+    if((time + hours - 1) > 20)
     {
-      alert('Starttidspunkt må være før sluttidspunkt');
+      $('#infoText').text('Du har valgt tidsrommet ' + time + ' - ' + '21');
+      start = time;
+      end = 21;
+
+    }
+    else
+    {
+      //document.getItemById("infoText").innerHTML='Hello';
+      //$('#chooseRoomSubmit').css('color','red');
+       $('#infoText').text('Du har valgt tidsrommet ' + time + ' - ' + (time + hours));
+        start = time;
+        end = (time + hours);
     }
   }
 
+
   book = function()
   {
+    $.ajax({
+      type: "POST",
+      url: "sendConfirmationMail.php",
+      data: {startTime : lbtest},
+      success: function(data)
+      {
+          alert("Successful");
+      }
+});
+/*
+    if($('#mailForm').is(":visible"))
+    {
+      alert('visible');
+    }
+    else
+    {
+      $('#mailForm').show();
+    }
+    */
+    /*
     if(start !== null && end !== null && start < end)
     {
-        var opts = {
-          url: 'search.php', // send ajax-request til denne filen
-          type: 'POST', // http-verb
-          data : { start : start, end : end }
-        };
+        request = $.ajax({
+          url: "/sendConfirmationMail.php",
+          type: "post",
+          data: 
+        });
 
-        $.when($.ajax(opts)).then(function() {
-          // suksess - dvs 200 i respons fra server
-            alert('hurra!');
-        });
-         // window.location.href="php/search.php";
-        }, function() {
-          // epic fail - dvs 500 i respons fra server
-            alert('oj, noe gikk feil');
-        });
+    // Callback handler that will be called on success
+    request.done(function (response, textStatus, jqXHR){
+        // Log a message to the console
+        console.log("Hooray, it worked!");
+    });
+
     }
     else
     {
       alert('Du må velge tidsrommet du vil booke!');
     }
+    */
   }
+  
 
   showError = function()
   {
-    alert('Ikke et gyldig tidspunkt');
+    $('#infoText').text('Ugyldig tidspunkt. Prøv de grønne boksene..');
   }
-
-/*
-registerBooking = function(){
-
-  var opts = {
-    url: 'php/sendConfirmationMail.php', // send ajax-request til denne filen
-    type: 'POST', // http-verb
-    data : { mailInput : 'roomNumber', roomNumber : 'foo' },
-  };
-
-  $.when($.ajax(opts)).then(function() {
-    // suksess - dvs 200 i respons fra server
-    alert('hurra!');
-});
-   // window.location.href="php/search.php";
-  }, function() {
-    // epic fail - dvs 500 i respons fra server
-    alert('oj, noe gikk feil');
-  });
-}
-*/
