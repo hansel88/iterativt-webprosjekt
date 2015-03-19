@@ -2,7 +2,7 @@
 require 'config.php';
 
 // Sjekker om alt er fylt ut som det skal
-if(!isset($_POST['email'], $_POST['room'], $_POST['date'], $_POST['fromTime'], $_POST['toTime'])) {
+if(!isset($_POST['email'], $_POST['date'], $_POST['room'], $_POST['fromTime'], $_POST['toTime'])) {
     http_response_code(400); // 400 bad request
     exit();
 }
