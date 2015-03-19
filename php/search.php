@@ -123,6 +123,7 @@ foreach ($possibleRooms as &$room) {
 	{
 		for ($x = 0; $x <= 12; $x++) {
 			$availableTimes[$x]->available = true;
+			$availableTimes[$x]->room_id = $room->room_nr;
 		} 
 		break; //Jumps out of loop as this room has available time all day (and thats all we need, eh? ;)
 	}
