@@ -1,5 +1,4 @@
 <?php
-session_start();
 require 'config.php';
 require 'header.php';
 
@@ -66,6 +65,4 @@ else {
     }
 }
 require 'footer.php';
-session_unset();
-session_destroy();
 ?>

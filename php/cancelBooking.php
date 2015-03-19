@@ -1,44 +1,48 @@
 <?php
-
-require 'config.php';
 include 'header.php';
-?>
-<section id="wrapper">
-<?php
 
-$token = isset($_GET['token']) ? $_GET['token'] : '';
+echo '<section id="wrapper"><h1>Booking kansellert</h1>';
 
-if($token == "")
+if (isset($_GET['id']) && is_numeric($_GET['id']) && isset($_GET['token']) && $_GET['token'] != "" && checkToken($_GET['id'], $_GET['token']))
 {
-	echo '<p id="infoText">Vi kunne ikke finne reservasjonen din.</p>';
+	$id = $_GET['id'];
+	$token = $_GET['token'];
+	cancelBooking($id, $token);
 }
 else
 {
-	$sql = $database->prepare("select * from room_reservation where token = :token");
-	$sql->setFetchMode(PDO::FETCH_OBJ);
-	$sql->execute(array(
-		'token' => $token
-	));
-
-	if (!$sql->fetch())
-	{
-		echo '<p id="infoText>Vi kunne ikke finne reservasjonen din.</p>';
-	}
-	else
-	{
-		
-		$reservation = $sql->fetch();
-		$sql = $database->prepare("delete from room_reservation where token = :token");
-		$sql->execute(array(
-			'token' => $token
-		));
-		echo '<p id="infoText>Reservasjonen din er nå kansellert.</p>';
-
-	}
+	redirect();
 }
 
-?>
-</section>
+function cancelBooking($id, $token)
+{
+	require 'config.php';
+	$sql = $database->prepare("delete from room_reservation where id = :id AND token = :token");
+	$sql->execute(array(
+		'id' => $id,
+		'token' => $token
+	));
+	echo '<p>Reservasjonen din er nå kansellert.</p>';
+}
 
-<?php
- include 'footer.php';
+function checkToken($id, $token)
+{
+	require 'config.php';
+	$sql = $database->prepare("select token from room_reservation where id = :id");
+	$sql->setFetchMode(PDO::FETCH_OBJ);
+	$sql->execute(array(
+		'id' => $id
+	));
+	$sqltoken = $sql->fetch()->token;
+	if ($sqltoken == $token) return true;
+	else return false;
+}
+
+function redirect()
+{
+	header("Location: ../index.php");
+	exit();
+}
+echo '</section>';
+
+include 'footer.php';
