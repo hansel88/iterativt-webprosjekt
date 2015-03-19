@@ -115,11 +115,10 @@ foreach ($possibleRooms as &$room) {
 			$from = date("H", strtotime($reservation->fromDate));
 			$to = date("H", strtotime($reservation->toDate));
 
-			for ($x =  intval($from); $x <= intval($to); $x++) {
+			for ($x =  intval($from); $x <= intval($to); $x++) { 
 				$_availableTimesForRoom[$x-8]->available = false;
 			}
     	}
-    
 	}
 
 	if(!$hasReservations)
@@ -131,12 +130,38 @@ foreach ($possibleRooms as &$room) {
 	}
 	else
 	{
+		$temp = $availableTimes;
+		$count = 0;
 		for ($x = 0; $x <= 12; $x++) {
-			if($_availableTimesForRoom[$x] == true)
+			if($_availableTimesForRoom[$x] == true) //TODO: legg til logikk for å sjekke at det er x antall timer ledige i strekk
+			{
+				$count++;
+				if(count == $hours)
+				{
+					for($z = 0; $z <= $count; $z++)
+					{
+						$availableTimes[$x - $z]->available = true;
+					}
+				}
+				else //over $hours på rad
+				{
+					$availableTimes[$x]->available = true;
+				}
+			}
+			else
+			{
+				$count = 0;
+			}
+		} 
+
+		/*
+		for ($x = 0; $x <= 12; $x++) {
+			if($_availableTimesForRoom[$x] == true) //TODO: legg til logikk for å sjekke at det er x antall timer ledige i strekk
 			{
 				$availableTimes[$x]->available = true;
 			}
 		} 
+		*/
 	}
 }
 
