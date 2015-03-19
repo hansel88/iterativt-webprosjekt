@@ -133,13 +133,12 @@ foreach ($possibleRooms as &$room) {
 	}
 	else
 	{
-		var_dump($_availableTimesForRoom);
+		//var_dump($_availableTimesForRoom);
 		//$temp = $availableTimes;
 		$count = 0;
 		for ($x = 0; $x <= 12; $x++) {
 			if($_availableTimesForRoom[$x]->available == true) 
 			{
-				echo 'sjdhfdsjkfhdskjhfsdf';
 				$count++;
 				if($count == $hours)
 				{
@@ -149,7 +148,7 @@ foreach ($possibleRooms as &$room) {
 						$availableTimes[$x - $z]->available = true;
 					}
 				}
-				else //over $hours på rad
+				else if($count > $hours) //over $hours på rad
 				{
 					$availableTimes[$x]->available = true;
 				}
