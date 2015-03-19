@@ -143,9 +143,10 @@ foreach ($possibleRooms as &$room) {
 
 echo '<div id="timeListContainer"><ul id="timeList">';
 	
+$noRoomsAvailable = true;
+
 foreach($availableTimes as $_time )
 {
-	$noRoomsAvailable = true;
 	if($_time->available)	
 	{
 		echo '<li><input id="timeInput' .$_time->time.'" type="button" onclick="chooseTime(' . $_time->time . ',' . $hours . ',' . $_time->room_id . ')" class="greenTime" value="' . $_time->time . '"/></li>';
@@ -160,7 +161,7 @@ foreach($availableTimes as $_time )
 
 echo '</ul></div>';
 
-if($noRoomsAvailable)
+if($noRoomsAvailable == true)
 {
 	echo '<p>Ingen rom tilgjengelig, prøv et nytt søk';
 }
@@ -171,9 +172,9 @@ echo '<p id="infoText"></p> <br />';
 echo '<form method="post" action="sendConfirmationMail.php" class="pure-form pure-form-aligned" id="mailForm"><div class="pure-control-group" style=""><label for="email">Epost:</label><input id="email" type="email" name="email" size="25" pattern=".+@student.westerdals.no" title="@student.westerdals.no" placeholder="bruker@student.westerdals.no" required></div>';
 	
 echo '<input type="text" style="display: none;" id="fromTime" name="fromTime" /> <input style="display: none;"  type="text" id="toTime" name="toTime" /> <input style="display: none;"  type="text" id="room" name="room" /> <input style="display: none;"  type="date" name="date" value="' . $from . '"/>';
-echo '<button class="pure-button pure-button-primary" onclick="goBack()">Tilbake</button>';
 echo '<button id="chooseRoomSubmit" type="submit" class="pure-button pure-button-primary">Book</button></form>';
 
+echo '<button class="pure-button pure-button-primary" onclick="goBack()">Tilbake</button>';
 
 ?>
 </section> 
