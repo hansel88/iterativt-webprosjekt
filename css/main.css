@@ -5,19 +5,21 @@ body
     font-family: Founders Grotesk;
 }
 
+/*
 @-webkit-viewport {
     zoom: 1.0;
     width: extend-to-zoom;
     min-height: 200px;
     min-width: 200px;
 }
+*/
 
 #wrapper
 {
     position: relative;
 	margin: auto;
 	height: 400px;
-
+    overflow: hidden;
 	border: 3px solid black;
 	padding: 5px;
     width: 400px;
@@ -137,6 +139,7 @@ th, td
 .greenTime{
     background-color: green;
     color: white;
+
 }
 
 #infoText {
@@ -144,6 +147,5 @@ th, td
     font-size: 1.2em;
     text-align: center;
 }
-
 
 

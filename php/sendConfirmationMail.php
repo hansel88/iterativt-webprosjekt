@@ -1,21 +1,20 @@
 <?php
-session_start();
 require 'config.php';
 require 'header.php';
 
 // Sjekker om alt er fylt ut som det skal
-if(!isset($_SESSION['email'], $_POST['room'], $_SESSION['fromDate'], $_SESSION['toDate'])) {
+if(!isset($_POST['email'], $_POST['room'], $_POST['fromDate'], $_POST['toDate'])) {
     http_response_code(400); // 400 bad request
     exit();
 }
 else {
-    $to = $_SESSION['email']; 
+    $to = $_POST['email']; 
     $token = uniqid(mt_rand(), true);
     echo $token;
     $from = "no-reply@room-booking.westerdals.no";
     $room = $_POST['room'];
-    $fromDate = $_SESSION['fromDate'];
-    $toDate = $_SESSION['toDate'];
+    $fromDate = $_POST['fromDate'];
+    $toDate = $_POST['toDate'];
 
     $sql = $database->prepare(
     "INSERT INTO room_reservation (room_nr, user_email, fromDate, toDate, token, confirmed) VALUES (:room_nr, :user_email, :fromDate, :toDate, :token, 0);"
@@ -57,15 +56,11 @@ else {
     if(mail($to,$subject,$message,$headers)) {
         http_response_code(200);  // mail ble sendt, all is well
         echo '<section id=wrapper><h1>Rom satt av</h1><p>Rommet er nå satt av, for å fullføre bestillingen må du følge instruksjonene som er sendt til ' . $to . ' .</p></submit>';
-        exit();
     }
     else
     {
         http_response_code(500); // klarte ikke å sende mail
-        exit();
     }
 }
 require 'footer.php';
-session_unset();
-session_destroy();
 ?>
