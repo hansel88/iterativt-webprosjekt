@@ -5,12 +5,14 @@ require 'header.php';
 
 ?>
 		<section id="wrapper">
-			<h3>Velg tidspunkt</h3>
+			
 <?php
 
 $from = $_POST['date'];
 $hours = $_POST['hours'];
 $size = $_POST['size'];
+
+echo '<h3>Velg tidspunkt</h3>';
 
 class availableTime
 {
