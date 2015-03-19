@@ -10,6 +10,6 @@
 	<body>
 		<div id="logo">
 			<a href="http://www.westerdals.no/">
-				<img id="logobilde" src="img/logo.jpg" alt="logo">
+				<img id="logobilde" src="img/logo.svg" alt="logo">
 			</a>
 		</div>

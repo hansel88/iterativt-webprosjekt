@@ -48,7 +48,7 @@ function orderInfo($id)
 		'id' => $id
 	));
 	$booking = $sql->fetch();
-	echo "<p>Rom " . $booking->room_nr . " er reservert for " . $booking->size . " personer i " . $booking->fromDate . " timer fra " . $booking->toDate . ".</p>";
+	echo "<p>Rom " . $booking->room_nr . " er reservert for " . $booking->size . " personer den " . substr($booking->fromDate, 0, 10) . " fra " . substr($booking->fromDate, -8, -3) . " til " . substr($booking->toDate, -8, -3) . ".</p>";
 }
 
 function bookingExists($id)
