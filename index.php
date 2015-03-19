@@ -2,7 +2,7 @@
  include 'php/indexHeader.php';
  ?>
 		<section id="wrapper">
-			<h1>Rom-booking</h1>
+			<h3>Rom-booking</h3>
 				<form class="pure-form pure-form-aligned" id="searchForm" name="searchForm" action="php/search.php" method="post">
 
 					<div class="pure-control-group">

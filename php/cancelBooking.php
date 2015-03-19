@@ -1,7 +1,7 @@
 <?php
 include 'header.php';
 
-echo '<section id="wrapper"><h1>Booking kansellert</h1>';
+echo '<section id="wrapper"><h3>Booking kansellert</h3>';
 
 if (isset($_GET['id']) && is_numeric($_GET['id']) && isset($_GET['token']) && $_GET['token'] != "" && checkToken($_GET['id'], $_GET['token']))
 {
