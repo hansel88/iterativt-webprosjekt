@@ -7,7 +7,12 @@
     return this.indexOf(suffix, this.length - suffix.length) !== -1;
   };
 
-  testMethod = function(time, hours, room)
+  goBack = function()
+  {
+    document.location.href = '../'; 
+  }
+
+  chooseTime = function(time, hours, room)
   {
     if(room === null || room === '')
     {
