@@ -225,16 +225,6 @@ else
 ?>
 </section> 
 
-<script>
-	testMethod = function(k)
-	{
-		alert(k);
-	}
-
-	showError = function()
-	{
-		alert('Ikke et gyldig tidspunkt');
-	}
-</script>
+<script src="../js/search.js"></script>
 
 <?php require 'footer.php'; ?>

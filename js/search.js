@@ -1,3 +1,26 @@
+
+  var start;
+  var end; 
+  testMethod = function(k)
+  {
+    if(start === null)
+      start = k;
+    else if(start < k)
+    {
+      end = k;
+    }
+    else if(start > k)
+    {
+      
+    }
+  }
+
+  showError = function()
+  {
+    alert('Ikke et gyldig tidspunkt');
+  }
+
+/*
 registerBooking = function(){
 
   var opts = {
@@ -16,3 +39,4 @@ registerBooking = function(){
     alert('oj, noe gikk feil');
   });
 }
+*/
