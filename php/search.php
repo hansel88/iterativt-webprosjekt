@@ -176,9 +176,11 @@ echo '</ul></div>';
 
 echo '<p id="infoText"></p> <br />';
 
-echo '<div class="pure-form pure-form-aligned" id="mailForm"><div class="pure-control-group" style=""><label for="email">Epost:</label><input id="email" type="email" name="email" size="25" pattern=".+@student.westerdals.no" title="@student.westerdals.no" placeholder="bruker@student.westerdals.no" required></div>';
-						
-echo '<button id="chooseRoomSubmit" onclick="book(\'' .$from .'\','.$hours.')" class="pure-button pure-button-primary">Book</button></div>';
+echo '<form method="post" action="sendConfirmationMail.php" class="pure-form pure-form-aligned" id="mailForm"><div class="pure-control-group" style=""><label for="email">Epost:</label><input id="email" type="email" name="email" size="25" pattern=".+@student.westerdals.no" title="@student.westerdals.no" placeholder="bruker@student.westerdals.no" required></div>';
+	
+echo '<input type="text" style="display: none;" id="fromTime" name="fromTime" /> <input style="display: none;"  type="text" id="toTime" name="toTime" /> <input style="display: none;"  type="text" id="room" name="room" /> <input style="display: none;"  type="date" name="date" value="' . $from . '"/>';
+echo '<button id="chooseRoomSubmit" type="submit" class="pure-button pure-button-primary">Book</button></form>';					
+//echo '<button id="chooseRoomSubmit" onclick="book(\'' .$from .'\','.$hours.')" class="pure-button pure-button-primary">Book</button></form>';
 
 
 

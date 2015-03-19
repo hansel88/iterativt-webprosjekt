@@ -44,7 +44,22 @@
 
   }
 
+  $('#chooseRoomSubmit').submit(function() {
+    if(start === null || start === '' || end === null || end === '' || roomId === null || roomId === '')
+    {
 
+    }
+    else
+    {
+     $('#fromTime').val(start);
+     $('#toTime').val(end);
+     $('#room').val(roomId);
+    }
+
+});
+
+
+/*
   book = function(date, hours)
   {
     var _email =  $('#email').val();
@@ -61,7 +76,7 @@
           data: {fromTime : start, toTime : end, date : date, room : roomId, email : _email},
           success: function(data)
           {
-              alert("Successful");
+            window.location.href = 'sendConfirmationMail.php';
           },
         error: function (xhr, ajaxOptions, thrownError) {
           alert('Noe gikk galt :(');
@@ -70,6 +85,7 @@
     });
     }
   }
+  */
   
 
   showError = function()
