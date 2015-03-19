@@ -1,16 +1,14 @@
 <?php
 require 'config.php';
-require 'header.php';
 
 // Sjekker om alt er fylt ut som det skal
-if(!isset($_POST['email'], $_POST['room'], $_POST['fromDate'], $_POST['toDate'])) {
+if(!isset($_POST['email'], $_POST['room'], $_POST['date'], $_POST['fromTime'], $_POST['toTime'])) {
     http_response_code(400); // 400 bad request
     exit();
 }
 else {
     $to = $_POST['email']; 
     $token = uniqid(mt_rand(), true);
-    echo $token;
     $from = "no-reply@room-booking.westerdals.no";
     $room = $_POST['room'];
     $date = $_POST['date'];
@@ -18,7 +16,7 @@ else {
     $toTime = $_POST['toTime'];
 
     $sql = $database->prepare(
-    "INSERT INTO room_reservation (room_nr, user_email, date, fromTime, toTime, token) VALUES (:room_nr, :user_email, :time, :fromTime, :toTime, :token);"
+    "INSERT INTO room_reservation (room_nr, user_email, date, fromTime, toTime, token) VALUES (:room_nr, :user_email, :date, :fromTime, :toTime, :token);"
     );
     $sql->execute(array(
         'room_nr' => $room,
@@ -52,17 +50,17 @@ else {
     $message .= "<p>English: Room" . $room . " " . " is reserved by you on " . $date . " from " . $fromTime . " to " . $toTime . ". Confirm reservation by clicking the link above. From there you can look at your order and cancel it.</p>";
     $message .= '</body></html>';
 
-    $headers .= "MIME-Version: 1.0\r\n";
+    $headers = "MIME-Version: 1.0\r\n";
     $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
     $headers .= "From:" . $from;
     if(mail($to,$subject,$message,$headers)) {
         http_response_code(200);  // mail ble sendt, all is well
-        echo '<section id=wrapper><h1>Rom satt av</h1><p>Rommet er nå satt av, for å fullføre bestillingen må du følge instruksjonene som er sendt til ' . $to . ' .</p></submit>';
+        header("order.php?id=" . $id);
+        exit;
     }
     else
     {
         http_response_code(500); // klarte ikke å sende mail
     }
 }
-require 'footer.php';
 ?>
