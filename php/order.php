@@ -42,13 +42,13 @@ function orderInfo($id)
 {
 	require 'config.php';
 	if (!isConfirmed($id)) echo '<p>Denne orderen er ikke konfirmert enda, vennligst konfirmer den ved å gå inn på linken sendt til deg på epost.</p>';
-	$sql = $database->prepare("SELECT b.room_nr, r.size, b.fromDate, b.toDate FROM room_reservation AS b JOIN room AS r ON b.room_nr = r.room_nr where id = :id");
+	$sql = $database->prepare("SELECT b.room_nr, r.size, b.date, b.fromTime, b.toTime FROM room_reservation AS b JOIN room AS r ON b.room_nr = r.room_nr where id = :id");
 	$sql->setFetchMode(PDO::FETCH_OBJ);
 	$sql->execute(array(
 		'id' => $id
 	));
 	$booking = $sql->fetch();
-	echo "<p>Rom " . $booking->room_nr . " er reservert for " . $booking->size . " personer den " . substr($booking->fromDate, 0, 10) . " fra " . substr($booking->fromDate, -8, -3) . " til " . substr($booking->toDate, -8, -3) . ".</p>";
+	echo "<p>Rom " . $booking->room_nr . " er reservert for " . $booking->size . " personer den " . $booking->date . " fra " . $booking->fromTime . " til " . $booking->toTime . ".</p>";
 }
 
 function bookingExists($id)
