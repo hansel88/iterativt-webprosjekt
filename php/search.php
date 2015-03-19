@@ -57,8 +57,6 @@ while ($room = $rooms->fetch())
 
 echo '!!! ' . join(', ', array_filter($possibleRoomIds));
 
-
-
 $reservations = $database->prepare("SELECT * FROM room_reservation WHERE confirmed = 1 AND fromDate BETWEEN :fromDate AND :toDate AND room_nr IN (:possibleRoomIds) ORDER BY room_nr");
 $reservations->setFetchMode(PDO::FETCH_OBJ);
 $reservations->execute(array(
@@ -79,6 +77,7 @@ while ($reservation = $reservations->fetch())
 	array_push($reservationsOnChosenDay, $reservation);
 }
 
+echo 'reservations on chosen day: ';
 print_r($reservationsOnChosenDay);
 
 //Used to get the full picture of available times 
@@ -125,6 +124,9 @@ foreach ($possibleRooms as &$room) {
 
 	if(!$hasReservations)
 	{
+		for ($x = 0; $x <= 12; $x++) {
+			$availableTimes[$x]->available = true;
+		} 
 		break; //Jumps out of loop as this room has available time all day (and thats all we need, eh? ;)
 	}
 	else
