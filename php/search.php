@@ -15,7 +15,7 @@ $size = $_POST['size'];
 
 echo 'hours: ' .  $hours;
 echo 'size: ' .  $size;
-echo 'date from --> ' . $from ;
+echo 'date from --> ' . $from;
 //$email = $_POST['email'];
 
 /*
@@ -27,6 +27,7 @@ class availableTime
 {
 	public $available;
     public $time = "";
+    public $room_id = "";
 }
 
 //$_SESSION['fromDate'] = $from;
@@ -109,10 +110,10 @@ foreach ($possibleRooms as &$room) {
     	{
     		$hasReservations = true;
 
-			$from = date("H", strtotime($reservation->fromDate));
-			$to = date("H", strtotime($reservation->toDate));
+			$fromHour = date("H", strtotime($reservation->fromDate));
+			$toHour = date("H", strtotime($reservation->toDate));
 
-			for ($x = intval($from); $x <= intval($to); $x++) { 
+			for ($x = intval($fromHour); $x <= intval($toHour); $x++) { 
 				$_availableTimesForRoom[$x-8]->available = false;
 			}
     	}
@@ -138,11 +139,14 @@ foreach ($possibleRooms as &$room) {
 					for($z = 0; $z < $count; $z++)
 					{
 						$availableTimes[$x - $z]->available = true;
+						$availableTimes[$x - $z]->room_id = $room->room_nr;
 					}
 				}
 				else if($count > $hours) //over $hours på rad
 				{
 					$availableTimes[$x]->available = true;
+					$availableTimes[$x]->room_id = $room->room_nr;
+
 				}
 			}
 			else
@@ -152,7 +156,7 @@ foreach ($possibleRooms as &$room) {
 			}
 		} 
 	}
-}
+}//$_time->room_id
 
 echo '<div id="timeListContainer"><ul id="timeList">';
 	
@@ -160,7 +164,7 @@ foreach($availableTimes as $_time )
 {
 	if($_time->available)	
 	{
-		echo '<li><input id="timeInput' .$_time->time.'" type="button" onclick="testMethod(' . $_time->time . ',' . $hours . ')" class="greenTime" value="' . $_time->time . '"/></li>';
+		echo '<li><input id="timeInput' .$_time->time.'" type="button" onclick="testMethod(' . $_time->time . ',' . $hours . ',' . $_time->room_id . ')" class="greenTime" value="' . $_time->time . '"/></li>';
 	}
 	else
 	{
@@ -172,9 +176,10 @@ echo '</ul></div>';
 
 echo '<p id="infoText"></p> <br />';
 
-echo '<form class="pure-form pure-form-aligned" id="mailForm"><div class="pure-control-group" style=""><label for="email">Epost:</label><input type="email" name="email" size="25" pattern=".+@student.westerdals.no" title="@student.westerdals.no" placeholder="bruker@student.westerdals.no" required></div>';
+echo '<div class="pure-form pure-form-aligned" id="mailForm"><div class="pure-control-group" style=""><label for="email">Epost:</label><input id="email" type="email" name="email" size="25" pattern=".+@student.westerdals.no" title="@student.westerdals.no" placeholder="bruker@student.westerdals.no" required></div>';
 						
-echo '<button id="chooseRoomSubmit" onclick="book()" type="submit" class="pure-button pure-button-primary">Book</button></form>';
+echo '<button id="chooseRoomSubmit" onclick="book(\'' .$from .'\','.$hours.')" class="pure-button pure-button-primary">Book</button></div>';
+
 
 
 
@@ -209,7 +214,7 @@ else
 	echo '<form id="selectRoom" name="selectRoom" action="sendConfirmationMail.php" method="post"><table><tr><th>Velg</th><th>Romnr</th><th>Dato</th><th>Fra</th><th>Til</th><th>Projektor</th></tr>';
 	do
 	{
-		$proj = 'Nei';
+			$proj = 'Nei';
 		if ($possibleRooms->projector == 1) $proj = 'Ja';
 		echo '<tr><td><input type="radio" name="room" value="' . $possibleRooms->room_nr . '" required></td><td>' . $possibleRooms->room_nr . '</td><td>' . substr($from, 0, 10) . '</td><td>' . substr($from, -5) . '</td><td>' . substr($to, -5) . '</td><td>' . $proj . '</td></tr>';
 	} while ($possibleRooms = $rooms->fetch());
@@ -224,3 +229,4 @@ else
 <script type="text/javascript" src="../js/search.js"></script>
 
 <?php require 'footer.php'; ?>
+
