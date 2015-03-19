@@ -56,12 +56,8 @@ while ($room = $rooms->fetch())
 }
 
 echo '!!! ' . join(', ', array_filter($possibleRoomIds));
-<<<<<<< HEAD
-*/
-=======
 
 /*
->>>>>>> origin/master
 $reservations = $database->prepare("SELECT * FROM room_reservation WHERE confirmed = 1 AND fromDate BETWEEN :fromDate AND :toDate AND room_nr IN (:possibleRoomIds) ORDER BY room_nr");
 $reservations->setFetchMode(PDO::FETCH_OBJ);
 $reservations->execute(array(
