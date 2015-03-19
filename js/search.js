@@ -44,17 +44,11 @@
 
   }
 
-  $('#chooseRoomSubmit').submit(function() {
-    if(start === null || start === '' || end === null || end === '' || roomId === null || roomId === '')
-    {
-
-    }
-    else
-    {
+  $('#mailForm').submit(function() {
+    alert('sdkfdfdsa');
      $('#fromTime').val(start);
      $('#toTime').val(end);
      $('#room').val(roomId);
-    }
 
 });
 
