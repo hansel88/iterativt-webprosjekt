@@ -2,12 +2,26 @@
 require 'config.php';
 // Create the table: blog
 $sql = $database->prepare(
-	"CREATE TABLE IF NOT EXISTS room (room_nr int NOT NULL, projector boolean NOT NULL, size int NOT NULL, PRIMARY KEY (room_nr));"
+	"CREATE TABLE IF NOT EXISTS room (
+		room_nr int NOT NULL,
+		projector boolean NOT NULL,
+		size int NOT NULL,
+		PRIMARY KEY (room_nr));"
 );
 $sql->execute();
 // Create the table: comments
 $sql = $database->prepare(
-	"CREATE TABLE IF NOT EXISTS room_reservation (id int NOT NULL AUTO_INCREMENT, room_nr int NOT NULL, user_email varchar(255) NOT NULL, fromDate datetime NOT NULL, toDate datetime NOT NULL, token varchar(255) NOT NULL, confirmed boolean, PRIMARY KEY (id), FOREIGN KEY (room_nr) REFERENCES room(room_nr));"
+	"CREATE TABLE IF NOT EXISTS room_reservation (
+		id int NOT NULL AUTO_INCREMENT,
+		room_nr int NOT NULL,
+		user_email varchar(255) NOT NULL,
+		date date NOT NULL,
+		fromTime time NOT NULL,
+		toTime time NOT NULL,
+		token varchar(255) NOT NULL,
+		confirmed boolean DEFAULT 0,
+		PRIMARY KEY (id),
+		FOREIGN KEY (room_nr) REFERENCES room(room_nr));"
 );
 $sql->execute();
 

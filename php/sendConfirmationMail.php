@@ -13,27 +13,30 @@ else {
     echo $token;
     $from = "no-reply@room-booking.westerdals.no";
     $room = $_POST['room'];
-    $fromDate = $_POST['fromDate'];
-    $toDate = $_POST['toDate'];
+    $date = $_POST['date'];
+    $fromTime = $_POST['fromTime'];
+    $toTime = $_POST['toTime'];
 
     $sql = $database->prepare(
-    "INSERT INTO room_reservation (room_nr, user_email, fromDate, toDate, token, confirmed) VALUES (:room_nr, :user_email, :fromDate, :toDate, :token, 0);"
+    "INSERT INTO room_reservation (room_nr, user_email, date, fromTime, toTime, token) VALUES (:room_nr, :user_email, :time, :fromTime, :toTime, :token);"
     );
     $sql->execute(array(
         'room_nr' => $room,
         'user_email' => $to,
-        'fromDate' => $fromDate,
-        'toDate' => $toDate,
+        'date' => $date,
+        'fromTime' => $fromTime,
+        'toTime' => $toTime,
         'token' => $token
     ));
 
-    $sql = $database->prepare("SELECT id FROM room_reservation WHERE room_nr = :room_nr AND user_email = :user_email AND fromDate = :fromDate AND toDate = :toDate AND token = :token");
+    $sql = $database->prepare("SELECT id FROM room_reservation WHERE room_nr = :room_nr AND user_email = :user_email AND date = :date AND fromTime = :fromTime AND toTime = :toTime AND token = :token");
     $sql->setFetchMode(PDO::FETCH_OBJ);
     $sql->execute(array(
         'room_nr' => $room,
         'user_email' => $to,
-        'fromDate' => $fromDate,
-        'toDate' => $toDate,
+        'date' => $date,
+        'fromTime' => $fromTime,
+        'toTime' => $toTime,
         'token' => $token
     ));
 
@@ -43,11 +46,10 @@ else {
 
     $message = '<html><body>';
     $message .= '<h3>Hei, ' .$to . '</h3>';
-    $message .= '<p>Rom ' .  $room . " " . "er holdt av for reservasjon av deg fra " . $fromDate . " til " . $toDate . ". Bekreft romreservasjon ved å trykke på knappen under. Her kan du også se på orderen din og evt. kansellere den.<p>";
-    $message .= '<a href="http://www.htodap.com/itw/php/confirmBooking.php?id' . $id . '&token=' . $token . '"' . 'style=\"margin-left: 20px; text-decoration: none; padding: 8px; background-color: #5A9E23; color: white;\">Bekreft Booking</a>';
-    echo '<a href="http://www.htodap.com/itw/php/confirmBooking.php?id' . $id . '&token=' . $token . '"' . 'style=\"margin-left: 20px; text-decoration: none; padding: 8px; background-color: #5A9E23; color: white;\">Bekreft Booking</a>';
+    $message .= '<p>Rom ' .  $room . " " . "er holdt av for reservasjon av deg den " . $date . " fra " . $fromTime . " til " . $toTime . ". Bekreft romreservasjon ved å trykke på knappen under. Her kan du også se på orderen din og evt. kansellere den.<p>";
+    $message .= '<a href="http://www.htodap.com/itw/php/confirmBooking.php?id=' . $id . '&token=' . $token . '"' . 'style=\"margin-left: 20px; text-decoration: none; padding: 8px; background-color: #5A9E23; color: white;\">Bekreft Booking</a>';
     $message .= '<p>Med vennlig hilsen Rom-booking Westerdals</p>';
-    $message .= "<p>English: Room" . $room . " " . " is reserved by you from " . $fromDate . " to " . $toDate . ". Confirm reservation by clicking the first link above. Cancel reservation by opening the second one.</p>";
+    $message .= "<p>English: Room" . $room . " " . " is reserved by you on " . $date . " from " . $fromTime . " to " . $toTime . ". Confirm reservation by clicking the link above. From there you can look at your order and cancel it.</p>";
     $message .= '</body></html>';
 
     $headers .= "MIME-Version: 1.0\r\n";
