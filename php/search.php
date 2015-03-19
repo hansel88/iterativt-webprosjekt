@@ -171,7 +171,7 @@ if($noRoomsAvailable == true)
 
 echo '<p id="infoText"></p> <br />';
 
-echo '<form method="post" action="sendConfirmationMail.php" class="pure-form pure-form-aligned" id="mailForm"><div class="pure-control-group" style=""><label for="email">Epost:</label><input id="email" type="email" name="email" size="25" pattern=".+@student.westerdals.no" title="@student.westerdals.no" placeholder="bruker@student.westerdals.no" required></div>';
+echo '<form method="post" action="sendConfirmationMail.php" class="pure-form pure-form-aligned" id="mailForm"><div class="pure-control-group"><label for="email" style="width: 7em; margin: 0 1em 0 0;">Epost:</label><input id="email" type="email" name="email" size="25" pattern=".+@student.westerdals.no" title="@student.westerdals.no" placeholder="bruker@student.westerdals.no" required></div>';
 	
 echo '<input type="text" style="display: none;" id="fromTime" name="fromTime" /> <input style="display: none;"  type="text" id="toTime" name="toTime" /> <input style="display: none;"  type="text" id="room" name="room" /> <input style="display: none;"  type="date" name="date" value="' . $from . '"/>';
 echo '<button id="chooseRoomSubmit" type="submit" class="pure-button pure-button-primary">Book</button></form>';
