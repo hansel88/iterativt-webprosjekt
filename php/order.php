@@ -12,7 +12,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id']) && bookingExists($_GET['id']))
 		$token = $_GET['token'];
 		if (!isConfirmed($id)) confirmBooking($id, $token);
 		orderInfo($id);
-		echo '<br><a href="http://www.htodap.com/itw/php/cancelBooking.php?id=' . $id . '&token=' . $token . '"' . 'style="margin-left: 20px; text-decoration: none; padding: 8px; background-color: #E02F1C; color: white;\">Kansellèr Booking</a>';
+		echo '<a href="cancelBooking.php?id=' . $id . '&token=' . $token . '"><button id="cancelBtn" class="pure-button pure-button-primary">Kansellèr Booking</button></a>';
 	}
 	else
 	{

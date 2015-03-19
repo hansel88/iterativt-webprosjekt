@@ -19,13 +19,21 @@ p
     text-align: center;
 }
 
+.pure-button
+{
+    border-radius: 0;
+    background-color: #1eb6ec;
+    color: black;
+}
+
 #wrapper
 {
     position: relative;
 	margin: auto;
 	height: 400px;
     overflow: hidden;
-	border: 3px solid black;
+    background-color: #EBECE7;
+	border: 3px solid #A8A6A9;
 	/*padding: 5px;*/
     width: 400px;
 }
@@ -110,13 +118,13 @@ th, td
 }
 
 .redTime{
-    background-color: red;
-    color: white;
+    background-color: #fd7265;
+    color: black;
 }
 
 .greenTime{
-    background-color: green;
-    color: white;
+    background-color: #63caa6;
+    color: black;
 }
 
 h3{
@@ -150,4 +158,12 @@ h3{
     left: 0px;
 }
     
-
+#cancelBtn
+{
+    margin-top: 30px;
+    height: 40px;
+    width: 100%;
+    left: 0px;
+    background-color: #fd7265;
+    color: black;
+}

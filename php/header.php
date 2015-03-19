@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html>
 	<head>
-        <title>Rom Reservering</title>
+        <title>Rom-reservering</title>
 		<meta charset="UTF-8">
         <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
 		<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
 		<link rel="stylesheet" href="../css/main.css">
 		<link rel="stylesheet" href="../css/jquery.datetimepicker.css">
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	</head>
 	<body>
 		<div id="logo">
@@ -15,6 +14,3 @@
 				<img id="logobilde" src="../img/logo.svg" alt="logo">
 			</a>
 		</div>
-
-
-
