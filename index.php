@@ -47,8 +47,6 @@
 	</script>
 	<script src="js/datetimeconfig.js">
 	</script>
-	<script src="js/misc.js">
-	</script>
 
 	 <?php include 'php/footer.php'; ?>
 
